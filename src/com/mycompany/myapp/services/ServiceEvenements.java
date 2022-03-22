@@ -43,13 +43,13 @@ public class ServiceEvenements {
   System.out.println(t);
         System.out.println("********");
         
-       String url = Statics.BASE_URL + "/addEventMobile?libelleE="+t.getLibelleE()+"&descriptionE=" + t.getDescriptionE()+"&dateDE=" + t.getDateDE()
-               +"&dateFE=" + t.getDateFE() + "&espaceE="+ t.getEspaceE() + "&capaciteE=" + t.getCapaciteE();
+       String url = Statics.BASE_URL + "/addEventMobile?libelleE="+t.getLibelleE()+"&dateDE=" 
+               + t.getDateDE()+"&dateFE=" + t.getDateFE() +"&descriptionE=" + t.getDescriptionE()+ "&espaceE="+ t.getEspaceE() + "&capaciteE=" + t.getCapaciteE();
        req.setUrl(url);
        req.addArgument("Libelle", t.getLibelleE());
-       req.addArgument("description", t.getDescriptionE());
        req.addArgument("datedebut", t.getDateDE());
        req.addArgument("datefin", t.getDateFE());
+       req.addArgument("description", t.getDescriptionE());
        req.addArgument("espace", t.getEspaceE());
        req.addArgument("capacite", t.getCapaciteE()+"");
         

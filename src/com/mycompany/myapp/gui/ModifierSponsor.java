@@ -39,7 +39,7 @@ btnAdd.addActionListener(new ActionListener() {
                     try {
                     Sponsors s = new Sponsors(Integer.parseInt(tfNom.getText()),tfAdresse.getText(),tfTel.getText());
 
-                        if( ServiceSponsors.getInstance().AddSponsor(s))
+                        if( ServiceSponsors.getInstance().updateSponsor(s))
                         {
                            Dialog.show("Success","Connection accepted",new Command("OK"));
                            previous.showBack();

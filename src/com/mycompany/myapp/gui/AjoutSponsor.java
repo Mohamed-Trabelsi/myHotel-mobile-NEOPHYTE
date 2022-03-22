@@ -22,22 +22,22 @@ import com.mycompany.myapp.services.ServiceSponsors;
  */
 public class AjoutSponsor extends Form{
      public AjoutSponsor(Form previous) {
-        setTitle("Add a new Sponsor");
+        setTitle("Ajouter un Sponsor");
         setLayout(BoxLayout.y());
             
-TextField tfNom = new TextField("","nomS");
-TextField tfAdresse = new TextField("","adresseS");
-TextField tfTel = new TextField("","telS");
+TextField tfNom = new TextField("","Nom");
+TextField tfAdresse = new TextField("","Adresse");
+TextField tfTel = new TextField("","Tel");
 Button btnAdd = new Button("Add");
 btnAdd.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
-                if ((tfNom.getText().length()==0)||(tfAdresse.getText().length()==0))
+                if ((tfNom.getText().length()==0)||(tfAdresse.getText().length()==0)||(tfTel.getText().length()==0))
                     Dialog.show("Alert", "Please fill all the fields", new Command("OK"));
                 else
                 {
                     try {
-                    Sponsors s = new Sponsors(Integer.parseInt(tfNom.getText()),tfAdresse.getText(),tfTel.getText());
+                    Sponsors s = new Sponsors(Integer.parseInt(tfTel.getText()),tfAdresse.getText(),tfNom.getText());
 
                         if( ServiceSponsors.getInstance().AddSponsor(s))
                         {

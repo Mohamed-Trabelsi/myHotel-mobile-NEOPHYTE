@@ -22,12 +22,14 @@ public class home extends Form{
         setTitle("Home Page");
         setLayout(BoxLayout.y());
         //Button btnAdd = new Button("add");
-        Button btnListEvenements = new Button("Liste des evenements");
-        Button btnListSponsors = new Button("Liste des sponsors");
+        Button btnListEvenements = new Button("Évènements");
+        Button btnListSponsors = new Button("Sponsors");
+        Button btnListEngagement = new Button("Engagements");
        
        btnListSponsors.addActionListener(e-> new AfficherSponsor(current).show());
        btnListEvenements.addActionListener(e-> new AfficherEvenement(current).show());
+       btnListEngagement.addActionListener(e-> new AfficherEngagement(current).show());
        //btnAdd.addActionListener(e-> new AjoutEvenement(current).show());
-        addAll(btnListEvenements,btnListSponsors);
+        addAll(btnListEvenements,btnListSponsors,btnListEngagement);
     }
 }

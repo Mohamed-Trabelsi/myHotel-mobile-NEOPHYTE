@@ -9,20 +9,20 @@ package com.mycompany.myapp.entities;
  * @author trabelssi
  */
 public class Engagements {
-    private int id,event,spons;
+    private int id,event,sponsor;
 
     public Engagements() {
     }
 
-    public Engagements(int event, int spons) {
+    public Engagements(int event, int sponsor) {
         this.event = event;
-        this.spons = spons;
+        this.sponsor = sponsor;
     }
 
-    public Engagements(int id, int event, int spons) {
+    public Engagements(int id, int event, int sponsor) {
         this.id = id;
         this.event = event;
-        this.spons = spons;
+        this.sponsor = sponsor;
     }
 
     public int getId() {
@@ -33,8 +33,8 @@ public class Engagements {
         return event;
     }
 
-    public int getSpons() {
-        return spons;
+    public int getSponsor() {
+        return sponsor;
     }
 
     public void setId(int id) {
@@ -45,12 +45,12 @@ public class Engagements {
         this.event = event;
     }
 
-    public void setSpons(int spons) {
-        this.spons = spons;
+    public void setSponsor(int sponsor) {
+        this.sponsor = sponsor;
     }
 
     @Override
     public String toString() {
-        return "Engagements{" + "event=" + event + ", spons=" + spons + '}';
+        return "Engagements{" + "event=" + event + ", spons=" + sponsor + '}';
     }
 }

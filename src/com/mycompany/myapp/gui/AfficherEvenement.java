@@ -19,7 +19,9 @@ import com.codename1.ui.plaf.UIManager;
 import com.codename1.ui.util.Resources;
 import com.mycompany.myapp.entities.Evenements;
 import com.mycompany.myapp.services.ServiceEvenements;
+
 import java.util.ArrayList;
+
 
 /**
  *
@@ -29,6 +31,10 @@ import java.util.ArrayList;
     public class AfficherEvenement extends Form {
                 public static Evenements evenementActuelle = null;
     public static Resources theme = UIManager.initFirstTheme("/theme");
+
+    static Object getInstance() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 
    
     Button btnAjouter;
@@ -65,7 +71,7 @@ import java.util.ArrayList;
         });
     }
 
-    private Component creerEvenement(Evenements event) {
+    Component creerEvenement(Evenements event) {
         Container evenementModel = new Container(new BoxLayout(BoxLayout.Y_AXIS));
         evenementModel.setUIID("evenementContainer");
 
@@ -84,8 +90,10 @@ import java.util.ArrayList;
         Label labelEspace = new Label(event.getEspaceE());
         labelEspace.setUIID("Espace");
         
-       // Label labelCapacite = new Label(Int.parseInt (event.getCapaciteE().toString()));
-        //labelCapacite.setUIID("Capacite");
+       
+       SpanLabel sp = new SpanLabel();
+       sp.setText("Capacite : " + event.getCapaciteE());
+       
 
         Container btnsContainer = new Container(new BoxLayout(BoxLayout.X_AXIS));
         btnsContainer.setUIID("buttonsContainer");
@@ -133,7 +141,7 @@ import java.util.ArrayList;
         });
 
         btnsContainer.addAll(btnModifier,btnSupprimer);
-      evenementModel.addAll(labelLibelle, labelDateD,labelDateF, spanLabelDescription,labelEspace, btnsContainer);     
+      evenementModel.addAll(labelLibelle, labelDateD,labelDateF, spanLabelDescription,labelEspace,sp, btnsContainer);     
         return evenementModel;
 
 

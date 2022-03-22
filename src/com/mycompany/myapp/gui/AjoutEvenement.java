@@ -15,8 +15,11 @@ import com.codename1.ui.events.ActionListener;
 import com.mycompany.myapp.entities.Evenements;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.Command;
+import com.codename1.ui.Display;
+import com.codename1.ui.spinner.Picker;
 
 import com.mycompany.myapp.services.ServiceEvenements;
+import java.util.ArrayList;
 
 
 /**
@@ -24,14 +27,46 @@ import com.mycompany.myapp.services.ServiceEvenements;
  * @author trabelssi
  */
 public class AjoutEvenement extends Form {
+    
+    /*public void refresh() {
+        this.removeAll();
+        addGUIs();
+        addActions();
+        this.refreshTheme();
+    }
+
+    private void addGUIs() {
+        btnAjouter = new Button("Ajouter");
+        btnAjouter.setUIID("newButton");
+
+        this.add(btnAjouter);
+     
+        ArrayList<Evenements> evenements = ServiceEvenements.getInstance().getAllEvenementssP();
+        for (int i = 0; i < evenements.size(); i++) {
+            this.add(creerEvenement(evenements.get(i)));
+        }
+    }
+
+    private void addActions() {
+        btnAjouter.addActionListener(action -> {
+            new AjoutEvenement(this).show();
+        });
+    }*/
+    
     public AjoutEvenement(Form previous) {
         setTitle("Ajouter un evenement");
         setLayout(BoxLayout.y());
             
 TextField tfLibelle = new TextField("","Libelle");
-TextField tfDateD = new TextField("","Description");
-TextField tfDescription = new TextField("","Date début");
-TextField tfDateF = new TextField("","Date fin");
+Picker dateDPicker = new Picker();
+dateDPicker.setType(Display.PICKER_TYPE_DATE);
+Picker dateFPicker = new Picker();
+dateFPicker.setType(Display.PICKER_TYPE_DATE);
+/*dateDPicker.setUIID("TextFieldBlack");
+addStringValue("Date debut",dateDPicker);
+TextField tfDateD= new TextField("","Date début");
+TextField tfDateF = new TextField("","Date fin");*/
+TextField tfDescription = new TextField("","Description");
 TextField tfEspace = new TextField("","Espace");
 TextField tfCapacite = new TextField("","Capacite");
 Button btnAdd = new Button("Add");
@@ -45,12 +80,12 @@ btnAdd.addActionListener(new ActionListener() {
                 else
                 {
                     try {
-                    Evenements t = new Evenements(tfLibelle.getText(),tfDescription.getText(),tfDateD.getText(),tfDateF.getText(),tfEspace.getText(),Integer.parseInt(tfCapacite.getText()));
+                    Evenements t = new Evenements(tfLibelle.getText(),dateDPicker.getText(),dateFPicker.getText(),tfDescription.getText(),tfEspace.getText(),Integer.parseInt(tfCapacite.getText()));
 
                         if( ServiceEvenements.getInstance().AddEvenements(t))
                         {
                            Dialog.show("Success","Connection accepted",new Command("OK"));
-                           previous.showBack();
+                           //previous.showBack();
                         }else
                             Dialog.show("ERROR", "Server error", new Command("OK"));
                     } catch (NumberFormatException e) {
@@ -59,7 +94,7 @@ btnAdd.addActionListener(new ActionListener() {
                 }               
             }  
         });
-addAll(tfLibelle,tfDescription,tfDateD,tfDateF,tfEspace,tfCapacite,btnAdd);
+addAll(tfLibelle,dateDPicker,dateFPicker,tfDescription,tfEspace,tfCapacite,btnAdd);
 getToolbar().addMaterialCommandToLeftBar("",FontImage.MATERIAL_ARROW_BACK, (evt) -> {
 previous.showBack();
 });                 
@@ -152,5 +187,9 @@ previous.showBack();
         });
 
     }*/
+
+    private void addStringValue(String date_debut, Picker dateDPicker) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
   
 }

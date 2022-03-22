@@ -5,6 +5,7 @@
 package com.mycompany.myapp.gui;
 
 import com.codename1.components.InteractionDialog;
+import com.codename1.components.SpanLabel;
 
 import com.codename1.ui.Button;
 import com.codename1.ui.Component;
@@ -74,8 +75,8 @@ public class AfficherSponsor extends Form{
         Label LabelAdresse = new Label((String)sponsor.getAdresseS());
         LabelAdresse.setUIID("Adresse");
         
-        //Label labelTel = new Label((String) sponsor.getTelS());
-        //labelTel.setUIID("numero");
+        SpanLabel sp = new SpanLabel();
+       sp.setText("Numero : " + sponsor.getTelS());
 
         Container btnsContainer = new Container(new BoxLayout(BoxLayout.X_AXIS));
         btnsContainer.setUIID("buttonsContainer");
@@ -123,7 +124,7 @@ public class AfficherSponsor extends Form{
         });
 
         btnsContainer.addAll(btnModifier,btnSupprimer);
-      evenementModel.addAll(labelNom, LabelAdresse,btnsContainer);     
+      evenementModel.addAll(labelNom, LabelAdresse,sp,btnsContainer);     
         return evenementModel;
 
 
