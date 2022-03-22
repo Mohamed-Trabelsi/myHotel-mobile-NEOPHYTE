@@ -48,7 +48,7 @@ public class ServiceUser {
         String url = Statics.BASE_URL + "/userMobileAdd?nom=" + u.getNom() + "&prenom=" + u.getPrenom()
                 + "&age=" + u.getAge() + "&cin=" + u.getCin() + "&telUser=" + u.getTel_user()
                 + "&emailUser=" + u.getEmail_user() + "&role=" + u.getRole()
-                + "&genre=" + u.getGenre() + "&password=" + u.getPassword();
+                + "&Genre=" + u.getGenre() + "&password=" + u.getPassword();
         req.setUrl(url);
         req.addArgument("nom", u.getNom());
         req.addArgument("prenom", u.getPrenom());
@@ -136,10 +136,12 @@ public class ServiceUser {
         return resultOK;
     }
 
-    /* public boolean updateSponsor (User u)
+    public boolean updateUser (User u,int id)
    {
-       String url = Statics.BASE_URL + "/updateEventMobile?id="+t.getId()+"&libelleE="+t.getLibelleE()+"&descriptionE=" + t.getDescriptionE()+"&dateDE=" + t.getDateDE()
-               +"&dateFE=" + t.getDateFE() + "&espaceE="+ t.getEspaceE() + "&capaciteE=" + t.getCapaciteE();
+       String url = Statics.BASE_URL + "/userMobileUpdate/"+id+ "?nom=" + u.getNom()+ "&prenom=" + u.getPrenom()
+                + "&age=" + u.getAge() + "&cin=" + u.getCin() + "&telUser=" + u.getTel_user()
+                + "&emailUser=" + u.getEmail_user() + "&role=" + u.getRole()
+                + "&Genre=" + u.getGenre() + "&password=" + u.getPassword();
         req.setUrl(url);
         req.addResponseListener(new ActionListener<NetworkEvent>(){
             @Override
@@ -151,5 +153,5 @@ public class ServiceUser {
         }); 
         NetworkManager.getInstance().addToQueueAndWait(req);
         return resultOK;
-   }*/
+   }
 }

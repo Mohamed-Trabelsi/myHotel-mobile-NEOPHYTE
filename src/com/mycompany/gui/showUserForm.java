@@ -36,7 +36,12 @@ public class showUserForm extends Form {
          super("", new BoxLayout(BoxLayout.Y_AXIS));
         addGUIs();
         addActions();
-        getToolbar().hideToolbar();
+       // getToolbar().hideToolbar();
+        getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, (evt) -> {
+            perevious.showBack();
+        });
+        
+       
     }
     
     public void refresh() {
@@ -49,8 +54,12 @@ public class showUserForm extends Form {
      private void addGUIs() {
         btnAjouter = new Button("Ajouter");
         btnAjouter.setUIID("newButton");
-
-        this.add(btnAjouter);
+        getToolbar().addMaterialCommandToRightBar(" ",FontImage.MATERIAL_ADD_CIRCLE,(evt1)-> {
+            new addUserForm(this).show();
+        });
+        
+      
+       // this.add(btnAjouter);
 
         ArrayList<User> users = ServiceUser.getInstance().getAllUsers();
         for (int i = 0; i < users.size(); i++) {
@@ -90,21 +99,23 @@ public class showUserForm extends Form {
         btnsContainer.setUIID("buttonsContainer");
         btnsContainer.setPreferredH(200);
 
-      /*  Button btnModifier = new Button();
-        btnModifier.setUIID("actionButton");*/
+        Button btnModifier = new Button();
+        btnModifier.setUIID("actionButton");
         Button btnSupprimer = new Button();
         btnSupprimer.setUIID("actionButton");
         FontImage.setMaterialIcon(btnSupprimer, FontImage.MATERIAL_DELETE);
-        //FontImage.setMaterialIcon(btnModifier, FontImage.MATERIAL_UPDATE);
+        FontImage.setMaterialIcon(btnModifier, FontImage.MATERIAL_UPDATE);
 
-    // btnModifier.addActionListener(action -> {
+     btnModifier.addActionListener(action -> {
+        
+          /* evenementActuelle = user;
+            new updateUser(this).show();
+            ServiceUser.getInstance().updateUser(user);
 
-         //   evenementActuelle = user;
-           /* new ModifierSponsor(this).show();
-            ServiceSponsors.getInstance().updateSponsor(sponsor);*/
-
-        //    addGUIs();
-      //  });
+            addGUIs();*/
+        updateUser.tfId.setText(String.valueOf(user.getId_user()));
+        new updateUser(this).show();
+        });
 
         btnSupprimer.addActionListener(action -> {
 
@@ -131,7 +142,7 @@ public class showUserForm extends Form {
 
         });
 
-        btnsContainer.addAll( btnSupprimer);
+        btnsContainer.addAll( btnSupprimer,btnModifier);
         evenementModel.addAll(labelNom, labelPrenom,labelAge,labelCin ,labelTelUser
                 ,labelEmailUser, labelRole, labelGenre, btnsContainer);
         return evenementModel;

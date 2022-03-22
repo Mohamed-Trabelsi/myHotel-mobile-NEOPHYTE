@@ -6,6 +6,7 @@
 package com.mycompany.gui;
 
 import com.codename1.ui.Button;
+import com.codename1.ui.ComboBox;
 import com.codename1.ui.Command;
 import com.codename1.ui.Dialog;
 import com.codename1.ui.FontImage;
@@ -28,16 +29,24 @@ public class addUserForm extends Form {
         setTitle("Add a new User");
         setLayout(BoxLayout.y());
 
-        TextField tfNom = new TextField("", "nom");
-        TextField tfPrenom = new TextField("", "prenom");
-        TextField tfAge = new TextField("", "age");
-        TextField tfCin = new TextField("", "cin");
-        TextField tfTelUser = new TextField("", "telUser");
-        TextField tfEmailUser = new TextField("", "emailUser");
-        TextField tfPassword = new TextField("", "password");
+        TextField tfNom = new TextField("", "Nom");
+        TextField tfPrenom = new TextField("", "Prenom");
+        TextField tfAge = new TextField("", "Age");
+        TextField tfCin = new TextField("", "CIN");
+        TextField tfTelUser = new TextField("", "N°Télephone");
+        TextField tfEmailUser = new TextField("", "E-mail");
+        TextField tfPassword = new TextField("", "Password");
         tfPassword.setConstraint(TextField.PASSWORD);
-        TextField tfRole = new TextField("", "role");
-        TextField tfGenre = new TextField("", "Genre");
+        //TextField tfRole = new TextField("", "role");
+        ComboBox cbRole = new ComboBox ();
+        cbRole.addItem ("Admin");
+        cbRole.addItem ("RH");
+        cbRole.addItem ("Staff");
+        //TextField tfGenre = new TextField("", "Genre");
+        ComboBox cbGenre = new ComboBox ();
+        cbGenre.addItem ("Homme");
+        cbGenre.addItem ("Femme");
+        cbGenre.addItem ("Autres");
         
         Button btnAdd = new Button("Add");
         btnAdd.addActionListener(new ActionListener() {
@@ -55,14 +64,15 @@ public class addUserForm extends Form {
                     try {
                          User u = new User(tfNom.getText(),tfPrenom.getText(),Integer.parseInt(tfAge.getText())
                                  ,Integer.parseInt(tfCin.getText()),Integer.parseInt(tfTelUser.getText())
-                                 ,tfEmailUser.getText(),tfPassword.getText(),tfRole.getText(),tfGenre.getText()
-                         );
+                                 ,tfEmailUser.getText(),tfPassword.getText(), (String) cbRole.getSelectedItem(), (String) cbGenre.getSelectedItem());
  
                         if (ServiceUser.getInstance().AddUser(u)) {
                                  //Dialog.show("Success", "Connection accepted", new Command("OK"));
+                                 Dialog.show("Success", "Ajouté avec succès", "OK", "CANCEL");
                             previous.showBack();
                         } else {
                             //Dialog.show("ERROR", "Server error", new Command("OK"));
+                            Dialog.show("Alerte", "Server error", "OK", "CANCEL");
                         }
                     } catch (NumberFormatException e) {
                        // Dialog.show("ERROR", "Status must be a number", new Command("OK"));
@@ -70,7 +80,7 @@ public class addUserForm extends Form {
                 }
             }
         });
-        addAll(tfNom, tfPrenom, tfAge,tfCin, tfTelUser, tfEmailUser,tfPassword, tfRole, tfGenre, btnAdd);
+        addAll(tfNom, tfPrenom,cbGenre, tfAge,tfCin, tfTelUser, tfEmailUser,tfPassword, cbRole,btnAdd);
         getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, (evt) -> {
             previous.showBack();
         });

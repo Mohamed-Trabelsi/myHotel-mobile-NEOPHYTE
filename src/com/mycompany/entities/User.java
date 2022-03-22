@@ -50,6 +50,18 @@ public class User {
         this.etat = etat;
         this.genre = genre;
     }
+
+    public User(String nom, String prenom, int age, int cin, int tel_user, String email_user, String role, String genre) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.age = age;
+        this.cin = cin;
+        this.tel_user = tel_user;
+        this.email_user = email_user;
+        this.role = role;
+        this.genre = genre;
+    }
+    
     
 
     public int getId_user() {
