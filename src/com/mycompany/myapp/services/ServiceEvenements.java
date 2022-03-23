@@ -27,7 +27,9 @@ public class ServiceEvenements {
     public static ServiceEvenements instance=null;
     public boolean resultOK=true;
     private ConnectionRequest req;
+    public ArrayList<Evenements> getAllEvenementssP;
 
+    
     private ServiceEvenements() {
          req = new ConnectionRequest();
     }
@@ -122,9 +124,9 @@ String url = Statics.BASE_URL +"/affichemobilEvent";
         return resultOK;
     }
     
-   public boolean updateSponsor (Evenements t)
+   public boolean updateEvent (Evenements t, int id)
    {
-       String url = Statics.BASE_URL + "/updateEventMobile?id="+t.getId()+"&libelleE="+t.getLibelleE()+"&descriptionE=" + t.getDescriptionE()+"&dateDE=" + t.getDateDE()
+       String url = Statics.BASE_URL + "/updateEventMobile/"+id+"?libelleE="+t.getLibelleE()+"&descriptionE=" + t.getDescriptionE()+"&dateDE=" + t.getDateDE()
                +"&dateFE=" + t.getDateFE() + "&espaceE="+ t.getEspaceE() + "&capaciteE=" + t.getCapaciteE();
         req.setUrl(url);
         req.addResponseListener(new ActionListener<NetworkEvent>(){

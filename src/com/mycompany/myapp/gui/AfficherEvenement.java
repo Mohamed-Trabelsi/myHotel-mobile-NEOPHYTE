@@ -43,7 +43,10 @@ import java.util.ArrayList;
         super("", new BoxLayout(BoxLayout.Y_AXIS));
         addGUIs();
         addActions();
-        getToolbar().hideToolbar();
+       // getToolbar().hideToolbar();
+        getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, (evt) -> {
+            perevious.showBack();
+        });
     }
 
     public void refresh() {
@@ -56,8 +59,11 @@ import java.util.ArrayList;
     private void addGUIs() {
         btnAjouter = new Button("Ajouter");
         btnAjouter.setUIID("newButton");
+        getToolbar().addMaterialCommandToRightBar(" ",FontImage.MATERIAL_ADD_CIRCLE,(evt1)-> {
+            new AjoutEvenement(this).show();
+        });
 
-        this.add(btnAjouter);
+        //this.add(btnAjouter);
      
         ArrayList<Evenements> evenements = ServiceEvenements.getInstance().getAllEvenementssP();
         for (int i = 0; i < evenements.size(); i++) {
@@ -107,12 +113,10 @@ import java.util.ArrayList;
                 FontImage.setMaterialIcon(btnModifier, FontImage.MATERIAL_UPDATE);
        
         btnModifier.addActionListener(action -> {
-
-           //evenementActuelle = reparation;
-            //new ModifierReparation(this).show();
-            //ServiceEvenements.getInstance().modifierReparation(reparation);
-
-            addGUIs();
+ evenementActuelle = event;
+            new ModifierSponsor(this).show();
+            ModifierEvenement.tfId.setText(String.valueOf(event.getId())); 
+        new ModifierEvenement(this).show();
         });
        
  btnSupprimer.addActionListener(action -> {

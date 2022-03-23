@@ -37,7 +37,10 @@ public class AfficherSponsor extends Form{
         super("", new BoxLayout(BoxLayout.Y_AXIS));
         addGUIs();
         addActions();
-        getToolbar().hideToolbar();
+       // getToolbar().hideToolbar();
+        getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, (evt) -> {
+            //perevious.showBack();
+        });
     }
 
     public void refresh() {
@@ -50,10 +53,13 @@ public class AfficherSponsor extends Form{
     private void addGUIs() {
         btnAjouter = new Button("Ajouter");
         btnAjouter.setUIID("newButton");
+        getToolbar().addMaterialCommandToRightBar(" ",FontImage.MATERIAL_ADD_CIRCLE,(evt1)-> {
+            new AjoutSponsor(this).show();
+        });
 
-        this.add(btnAjouter);
+        //this.add(btnAjouter);
      
-        ArrayList<Sponsors> evenements = ServiceSponsors.getInstance().getAllEvenementssP();
+        ArrayList<Sponsors> evenements = ServiceSponsors.getInstance().getAllSponsor();
         for (int i = 0; i < evenements.size(); i++) {
             this.add(creerEvenement(evenements.get(i)));
         }
@@ -93,9 +99,11 @@ public class AfficherSponsor extends Form{
 
            evenementActuelle = sponsor;
             new ModifierSponsor(this).show();
-            ServiceSponsors.getInstance().updateSponsor(sponsor);
+            /*ServiceSponsors.getInstance().updateSponsor(sponsor);
 
-            addGUIs();
+            addGUIs();*/
+            ModifierSponsor.tfId.setText(String.valueOf(sponsor.getId())); 
+        new ModifierSponsor(this).show();             
         });
        
  btnSupprimer.addActionListener(action -> {

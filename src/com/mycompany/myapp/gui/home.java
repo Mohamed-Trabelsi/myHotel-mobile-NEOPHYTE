@@ -28,7 +28,7 @@ public class home extends Form{
        
        btnListSponsors.addActionListener(e-> new AfficherSponsor(current).show());
        btnListEvenements.addActionListener(e-> new AfficherEvenement(current).show());
-       btnListEngagement.addActionListener(e-> new AfficherEngagement(current).show());
+       btnListEngagement.addActionListener(e-> new AjoutEngagement(current).show());
        //btnAdd.addActionListener(e-> new AjoutEvenement(current).show());
         addAll(btnListEvenements,btnListSponsors,btnListEngagement);
     }

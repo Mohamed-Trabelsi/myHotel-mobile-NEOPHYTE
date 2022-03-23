@@ -38,7 +38,10 @@ public class AfficherEngagement extends Form {
         super("", new BoxLayout(BoxLayout.Y_AXIS));
         addGUIs();
         //addActions();
-        getToolbar().hideToolbar();
+       // getToolbar().hideToolbar();
+        getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, (evt) -> {
+            //perevious.showBack();
+        });
     }
 
     public void refresh() {
@@ -51,26 +54,30 @@ public class AfficherEngagement extends Form {
     private void addGUIs() {
         btnAjouter = new Button("Ajouter");
         btnAjouter.setUIID("newButton");
+        getToolbar().addMaterialCommandToRightBar(" ",FontImage.MATERIAL_ADD_CIRCLE,(evt1)-> {
+            //new AjoutEvenement(this).show();
+        });
 
-        this.add(btnAjouter);
+        //this.add(btnAjouter);
      
-        ArrayList<Engagements> en = ServiceEngagements.getInstance().getAllEvenementssP();
+        ArrayList<Engagements> en = ServiceEngagements.getInstance().getEngagement();
         for (int i = 0; i < en.size(); i++) {
             this.add(creerEngagement(en.get(i)));
         }
     }
 
     /*private void addActions() {
-        btnAjouter.addActionListener(action -> {
-            new AjoutSponsor(this).show();
+         btnAjouter.addActionListener(action -> {
+            new AjoutEvenement(this).show();
         });
     }*/
 
     private Component creerEngagement(Engagements eng) {
+        
         Container evenementModel = new Container(new BoxLayout(BoxLayout.Y_AXIS));
         evenementModel.setUIID("engagementContainer");
-       Evenements e = new Evenements();
-       Sponsors s = new Sponsors();
+       /*Evenements e = new Evenements();
+       Sponsors s = new Sponsors();*/
        SpanLabel spEvent = new SpanLabel();
        spEvent.setText("Evenement : " + eng.getEvent());
        

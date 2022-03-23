@@ -22,6 +22,7 @@ import java.util.Map;
  * @author trabelssi
  */
 public class ServiceEngagements {
+    
      public ArrayList<Engagements> engagements;
     public static ServiceEngagements instance=null;
     public boolean resultOK=true;
@@ -37,20 +38,19 @@ public class ServiceEngagements {
         }
         return instance;
     }
-   /* public boolean AddEvenements(Engagements t){
+    
+    
+    public boolean AddEngagements(Engagements t){
        
   System.out.println(t);
         System.out.println("********");
         
-       String url = Statics.BASE_URL + "/addEventMobile?libelleE="+t.getLibelleE()+"&descriptionE=" + t.getDescriptionE()+"&dateDE=" + t.getDateDE()
-               +"&dateFE=" + t.getDateFE() + "&espaceE="+ t.getEspaceE() + "&capaciteE=" + t.getCapaciteE();
+       String url = Statics.BASE_URL + "/addEnMobile?event="+t.getEvent()+"&sponsor=" + t.getSponsor();
+               
        req.setUrl(url);
-       req.addArgument("Libelle", t.getLibelleE());
-       req.addArgument("description", t.getDescriptionE());
-       req.addArgument("datedebut", t.getDateDE());
-       req.addArgument("datefin", t.getDateFE());
-       req.addArgument("espace", t.getEspaceE());
-       req.addArgument("capacite", t.getCapaciteE()+"");
+
+       req.addArgument("evenement", t.getEvent()+"");
+       req.addArgument("sponsor", t.getSponsor()+"");
         
        req.addResponseListener(new ActionListener<NetworkEvent>() {
             @Override
@@ -61,7 +61,7 @@ public class ServiceEngagements {
         });
         NetworkManager.getInstance().addToQueueAndWait(req);
         return resultOK;
-    }*/
+    }
 
     
     
@@ -77,6 +77,7 @@ public class ServiceEngagements {
                 Engagements t = new Engagements();
                    float id= Float.parseFloat(obj.get("id").toString());
                 t.setId((int)id);
+                 //t.setEvent(obj.get("event"));
                 float event= Float.parseFloat(obj.get("event").toString());
                 t.setEvent((int)event);
                            
@@ -90,7 +91,7 @@ public class ServiceEngagements {
         return engagements;
     }
     
-    public ArrayList<Engagements> getAllEvenementssP(){
+    public ArrayList<Engagements> getEngagement(){
 String url = Statics.BASE_URL +"/afficheEnEvent";
     req.setUrl(url);
        

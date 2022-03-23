@@ -26,6 +26,7 @@ public class ServiceSponsors {
     public static ServiceSponsors instance=null;
     public boolean resultOK=true;
     private ConnectionRequest req;
+    public ArrayList<Sponsors> getAllEvenementssP;
 
     private ServiceSponsors() {
          req = new ConnectionRequest();
@@ -84,7 +85,7 @@ public class ServiceSponsors {
         return sponsors;
     }
     
-    public ArrayList<Sponsors> getAllEvenementssP(){
+    public ArrayList<Sponsors> getAllSponsor(){
 String url = Statics.BASE_URL +"/affichemobileSpons";
     req.setUrl(url);
        
@@ -115,9 +116,9 @@ String url = Statics.BASE_URL +"/affichemobileSpons";
         return resultOK;
     }
    
-   public boolean updateSponsor (Sponsors s)
+   public boolean updateSponsor (Sponsors s, int id)
    {
-       String url = Statics.BASE_URL + "/updateSponsorMobile?id="+s.getId()+"&nomS="+s.getNomS()+"&adresseS=" + s.getAdresseS()+"&telS=" + s.getTelS();
+       String url = Statics.BASE_URL + "/updateSponsorMobile/"+id+"?nomS="+s.getNomS()+"&adresseS=" + s.getAdresseS()+"&telS=" + s.getTelS();
         req.setUrl(url);
         req.addResponseListener(new ActionListener<NetworkEvent>(){
             @Override

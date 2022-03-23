@@ -59,9 +59,9 @@ public class AjoutEvenement extends Form {
             
 TextField tfLibelle = new TextField("","Libelle");
 Picker dateDPicker = new Picker();
-dateDPicker.setType(Display.PICKER_TYPE_DATE);
+dateDPicker.setType(Display.PICKER_TYPE_DATE_AND_TIME);
 Picker dateFPicker = new Picker();
-dateFPicker.setType(Display.PICKER_TYPE_DATE);
+dateFPicker.setType(Display.PICKER_TYPE_DATE_AND_TIME);
 /*dateDPicker.setUIID("TextFieldBlack");
 addStringValue("Date debut",dateDPicker);
 TextField tfDateD= new TextField("","Date début");
