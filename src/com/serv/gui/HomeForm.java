@@ -25,22 +25,22 @@ public class HomeForm extends Form {
         setTitle("Home");
         setLayout(BoxLayout.y());
         
-        add(new Label("Choose an option"));
+   /*     add(new Label("Choose an option"));
         Button btnAddCateg = new Button("Ajouter catégorie");
         Button btnListCateg = new Button("Liste des catégories");
          Button btnaddserv = new Button("ajouter service");
             Button btnlistserv = new Button("liste des services");
-  
-        btnAddCateg.addActionListener(e-> new addCategForm(current).show());
+  Resources res = null;
+        btnAddCateg.addActionListener(e-> new addCategForm(current,res).show());
         btnListCateg.addActionListener(e-> new listCategForm(current).show());
         btnaddserv.addActionListener(e-> new addServForm(current).show());
 btnlistserv.addActionListener(e-> new listServForm(current).show());
-
+*/
     
     
 
 
-        addAll(btnAddCateg,btnListCateg,btnaddserv,btnlistserv);
+       // addAll(btnAddCateg,btnListCateg,btnaddserv,btnlistserv);
          Menu(this);
         
     } 
@@ -48,10 +48,14 @@ btnlistserv.addActionListener(e-> new listServForm(current).show());
 
   
         Resources res = null;
-       
-
-          f.getToolbar().addMaterialCommandToLeftSideMenu("Statistique services", " ".charAt(0),e -> new listCategForm(f) .show());
-            f.getToolbar().addMaterialCommandToLeftSideMenu("Statistique services", " ".charAt(0),e -> new statistique().getF().show());
+             f.getToolbar().addMaterialCommandToLeftSideMenu("Gestion des utilisateurs", " ".charAt(0),e -> new listCategForm(f) .show());
+         f.getToolbar().addMaterialCommandToLeftSideMenu("Gestion des services", " ".charAt(0),e -> new HomeServForm().show());
+        f.getToolbar().addMaterialCommandToLeftSideMenu("Gestion des évenements", " ".charAt(0),e -> new listCategForm(f) .show());
+           f.getToolbar().addMaterialCommandToLeftSideMenu("Gestion des produits", " ".charAt(0),e -> new listCategForm(f) .show());
+   f.getToolbar().addMaterialCommandToLeftSideMenu("Gestion des agences", " ".charAt(0),e -> new listCategForm(f) .show());
+    f.getToolbar().addMaterialCommandToLeftSideMenu("Gestion des réservation", " ".charAt(0),e -> new listCategForm(f) .show());
+         // f.getToolbar().addMaterialCommandToLeftSideMenu("Statistique services", " ".charAt(0),e -> new listCategForm(f) .show());
+           // f.getToolbar().addMaterialCommandToLeftSideMenu("Statistique services", " ".charAt(0),e -> new statistique().getF().show());
 
     }
        
