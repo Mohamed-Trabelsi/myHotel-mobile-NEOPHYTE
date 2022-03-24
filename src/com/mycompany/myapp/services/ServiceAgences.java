@@ -29,7 +29,7 @@ public class ServiceAgences {
     public boolean resultOK=true;
     private ConnectionRequest req;
 
-    private ServiceAgences() {
+    public ServiceAgences() {
          req = new ConnectionRequest();
     }
 
@@ -128,9 +128,9 @@ String url = Statics.BASE_URL +"/dis";
     
     
     
-    public boolean updateAgence (Agences t)
+    public boolean updateAgence (Agences t, int id)
    {
-       String url = Statics.BASE_URL+"/modifiera?id="+t.getId()+"&nom="+t.getNom()+"&num="+t.getNum()+"&email="+t.getEmail();
+       String url = Statics.BASE_URL+"/modifiera/"+id+"?nom="+t.getNom()+"&num="+t.getNum()+"&email="+t.getEmail();
         req.setUrl(url);
         req.addResponseListener(new ActionListener<NetworkEvent>(){
             @Override

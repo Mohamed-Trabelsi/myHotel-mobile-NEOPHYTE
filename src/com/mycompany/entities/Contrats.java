@@ -5,27 +5,30 @@
  */
 package com.mycompany.entities;
 
+
 /**
  *
  * @author asus
  */
 public class Contrats {
     private int etat,id,prix;
-    private String dated,datef,contenu,titre;
-    private Agences agence;
+    private String contenu,titre,dated,datef,agence;
+    
+  
     
 public Contrats() {
         
     }
-    public Contrats(String dated, String datef, String contenu, String titre,int prix) {
+    public Contrats(String dated, String datef, String contenu, String titre,int prix, String agence) {
         this.dated = dated;
         this.datef = datef;
         this.contenu = contenu;
         this.titre = titre;
         this.prix = prix;
+         this.agence = agence;
     }
 
-    public Contrats(int id,int etat, String dated, String datef, String contenu, String titre,int prix, Agences agence) {
+    public Contrats(int id,int etat, String dated, String datef, String contenu, String titre,int prix, String agence) {
         this.etat = etat;
         this.id = id;
         this.dated = dated;
@@ -36,7 +39,7 @@ public Contrats() {
         this.agence = agence;
     }
 
-    public Contrats(int etat, String dated, String datef, String contenu, String titre,int prix,Agences agence) {
+    public Contrats(int etat, String dated, String datef, String contenu, String titre,int prix,String agence) {
         this.etat = etat;
         this.dated = dated;
         this.datef = datef;
@@ -45,6 +48,8 @@ public Contrats() {
         this.prix = prix;
         this.agence = agence;
     }
+
+ 
 
     public int getPrix() {
         return prix;
@@ -106,12 +111,13 @@ public Contrats() {
         this.titre = titre;
     }
 
-    public Agences getAgence() {
+    public String getAgence() {
         return agence;
     }
 
-    public void setAgence(Agences agence) {
+    public void setAgence(String agence) {
         this.agence = agence;
     }
+    
     
 }

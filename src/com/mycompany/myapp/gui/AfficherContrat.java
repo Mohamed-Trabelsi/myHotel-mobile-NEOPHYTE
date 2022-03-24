@@ -61,24 +61,18 @@ public class AfficherContrat extends Form{
                 new AjoutContrat(this).show();
         });
     }
+    
     private Component creerEvenement(Contrats event) {
         Container evenementModel = new Container(new BoxLayout(BoxLayout.Y_AXIS));
-        evenementModel.setUIID("evenementContainer");
-
-        Label labelLibelle = new Label((String) event.getTitre());
-        labelLibelle.setUIID("titre");
+        evenementModel.setUIID("contratContainer");
         
-        SpanLabel spanLabelDescription = new SpanLabel(event.getContenu());
-        spanLabelDescription.setTextUIID("description");
+        SpanLabel labelLibelle = new SpanLabel("titre : " + event.getTitre());
+        SpanLabel spanLabelDescription = new SpanLabel("description : " + event.getContenu());
+        SpanLabel labelCapacite = new SpanLabel("prix : " + event.getPrix());
         
-        Label labelCapacite = new Label((int)event.getPrix()+"");
-        labelCapacite.setUIID("prix");
-        
-        Label labelDateD = new Label((String) event.getDated());
-        labelDateD.setUIID("Date debut");
-        
-        Label labelDateF = new Label((String) event.getDatef());
-        labelDateF.setUIID("Date fin");
+        SpanLabel sp3 = new SpanLabel("date de debut : " + event.getDated());
+        SpanLabel sp4 = new SpanLabel("date de fin : " + event.getDatef());
+        SpanLabel sp5 = new SpanLabel("agence : " + event.getAgence());
         
         
         
@@ -150,7 +144,7 @@ public class AfficherContrat extends Form{
         });
 
         btnsContainer.addAll(btnModifier,btnSupprimer);
-      evenementModel.addAll(labelLibelle, labelDateD,labelDateF, spanLabelDescription,labelCapacite,btnsContainer);     
+      evenementModel.addAll(labelLibelle,  spanLabelDescription,labelCapacite,sp5,sp3,sp4,btnsContainer);     
         return evenementModel;
 
 

@@ -93,9 +93,8 @@ private void addGUIs() {
 
            evenementActuelle = event;
             new ModifierAgence(this).show();
-            ServiceAgences.getInstance().updateAgence(event);
-
-            addGUIs();
+            ModifierAgence.tfId.setText(String.valueOf(event.getId())); 
+        new ModifierAgence(this).show(); 
         });
     btnSupprimer.addActionListener(action -> {
 

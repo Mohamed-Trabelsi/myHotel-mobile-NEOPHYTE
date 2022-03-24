@@ -21,6 +21,9 @@ import com.mycompany.myapp.services.ServiceAgences;
  * @author asus
  */
 public class ModifierAgence extends Form{
+    static TextField tfId = new TextField();
+    Agences current;
+    
      public ModifierAgence(Form previous) {
         setTitle("Modifier Agence");
         setLayout(BoxLayout.y());
@@ -35,15 +38,17 @@ Button btnAdd = new Button("Modifier");
             public void actionPerformed(ActionEvent evt) {
                 if ((tfLibelle.getText().length()==0)||(tfDescription.getText().length()==0)|| (tfDateD.getText().length()==0))
                     Dialog.show("Alert", "Please fill all the fields", new Command("OK"));
+                
                 else
                 {
                     try {
                     Agences s = new Agences(Integer.parseInt(tfDateD.getText()),tfLibelle.getText(),tfDescription.getText());
                     
 
-                        if( ServiceAgences.getInstance().updateAgence(s))
+                        if( ServiceAgences.getInstance().updateAgence(s,Integer.parseInt(tfId.getText())))
                         {
                            Dialog.show("Success","Connection accepted",new Command("OK"));
+                           
                            previous.showBack();
                         }else
                             Dialog.show("ERROR", "Server error", new Command("OK"));
@@ -55,6 +60,7 @@ Button btnAdd = new Button("Modifier");
         });
 addAll(tfLibelle,tfDateD,tfDescription,btnAdd);
 getToolbar().addMaterialCommandToLeftBar("",FontImage.MATERIAL_ARROW_BACK, (evt) -> {
+    
 previous.showBack();
 });                 
     }

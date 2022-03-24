@@ -46,13 +46,14 @@ public class ServiceContrats {
         System.out.println("********");
         
        String url = Statics.BASE_URL + "/ajoutC?titre="+t.getTitre()+"&contenu=" + t.getContenu()+"&dated=" + t.getDated()
-               +"&datef=" + t.getDatef() + "&prix=" + t.getPrix();
+               +"&datef=" + t.getDatef() + "&prix=" + t.getPrix()+ "&agence=" + t.getAgence();
        req.setUrl(url);
        req.addArgument("Libelle", t.getTitre());
        req.addArgument("description", t.getContenu());
        req.addArgument("datedebut", t.getDated());
        req.addArgument("datefin", t.getDatef());
        req.addArgument("prix", t.getPrix()+"");
+       req.addArgument("agence", t.getAgence());
        
         
        req.addResponseListener(new ActionListener<NetworkEvent>() {
