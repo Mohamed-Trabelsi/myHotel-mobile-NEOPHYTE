@@ -75,14 +75,16 @@ public class ServiceEngagements {
              List<Map<String,Object>> list = (List<Map<String,Object>>)engagementsListJson.get("root");
             for(Map<String,Object> obj : list){
                 Engagements t = new Engagements();
-                   float id= Float.parseFloat(obj.get("id").toString());
+                
+                float id= Float.parseFloat(obj.get("id").toString());
                 t.setId((int)id);
-                 //t.setEvent(obj.get("event"));
-                float event= Float.parseFloat(obj.get("event").toString());
-                t.setEvent((int)event);
-                           
-                float spons= Float.parseFloat(obj.get("event").toString());
-                t.setSponsor((int)spons);
+                 /*float event= Float.parseFloat(obj.get("Evenements").toString());
+                t.setId((int)event);
+                 float sponsor= Float.parseFloat(obj.get("Sponsors").toString());
+                t.setId((int)sponsor);*/
+                 t.setE(obj.get("Evenements").toString());
+                 t.setS(obj.get("Sponsors").toString());
+                 
                 engagements.add(t);
             }  
         } catch (IOException ex) {
@@ -92,7 +94,7 @@ public class ServiceEngagements {
     }
     
     public ArrayList<Engagements> getEngagement(){
-String url = Statics.BASE_URL +"/afficheEnEvent";
+String url = Statics.BASE_URL +"/displayEn";
     req.setUrl(url);
        
         req.addResponseListener(new ActionListener<NetworkEvent>() {
@@ -106,7 +108,7 @@ String url = Statics.BASE_URL +"/afficheEnEvent";
         return engagements;
     }
     
-    public boolean deleteEngagementt(int id)
+    public boolean deleteEngagement(int id)
     {
         String url = Statics.BASE_URL +"/deleteEnMobile?id="+id;
         req.setUrl(url);

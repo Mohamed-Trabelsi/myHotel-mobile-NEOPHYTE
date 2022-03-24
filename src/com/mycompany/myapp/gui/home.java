@@ -25,10 +25,12 @@ public class home extends Form{
         Button btnListEvenements = new Button("Évènements");
         Button btnListSponsors = new Button("Sponsors");
         Button btnListEngagement = new Button("Engagements");
+        
        
        btnListSponsors.addActionListener(e-> new AfficherSponsor(current).show());
        btnListEvenements.addActionListener(e-> new AfficherEvenement(current).show());
-       btnListEngagement.addActionListener(e-> new AjoutEngagement(current).show());
+       
+       btnListEngagement.addActionListener(e-> new AfficherEngagement(current).show());
        //btnAdd.addActionListener(e-> new AjoutEvenement(current).show());
         addAll(btnListEvenements,btnListSponsors,btnListEngagement);
     }

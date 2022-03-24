@@ -10,6 +10,29 @@ package com.mycompany.myapp.entities;
  */
 public class Engagements {
     private int id,event,sponsor;
+private String e,s;
+
+    public Engagements(int id, String e, String s) {
+        this.id = id;
+        this.e = e;
+        this.s = s;
+    }
+
+    public String getE() {
+        return e;
+    }
+
+    public String getS() {
+        return s;
+    }
+
+    public void setE(String e) {
+        this.e = e;
+    }
+
+    public void setS(String s) {
+        this.s = s;
+    }
 
     public Engagements() {
     }

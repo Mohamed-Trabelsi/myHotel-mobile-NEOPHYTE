@@ -55,7 +55,7 @@ public class AfficherEngagement extends Form {
         btnAjouter = new Button("Ajouter");
         btnAjouter.setUIID("newButton");
         getToolbar().addMaterialCommandToRightBar(" ",FontImage.MATERIAL_ADD_CIRCLE,(evt1)-> {
-            //new AjoutEvenement(this).show();
+            new AjoutEngagement(this).show();
         });
 
         //this.add(btnAjouter);
@@ -78,11 +78,14 @@ public class AfficherEngagement extends Form {
         evenementModel.setUIID("engagementContainer");
        /*Evenements e = new Evenements();
        Sponsors s = new Sponsors();*/
+       
+       
+       
        SpanLabel spEvent = new SpanLabel();
-       spEvent.setText("Evenement : " + eng.getEvent());
+       spEvent.setText("Evenement : " + eng.getE());
        
        SpanLabel spSponsor = new SpanLabel();
-       spSponsor.setText("Sponsor : " + eng.getSponsor());
+       spSponsor.setText("Sponsor : " + eng.getS());
 
         Container btnsContainer = new Container(new BoxLayout(BoxLayout.X_AXIS));
         btnsContainer.setUIID("buttonsContainer");
@@ -102,7 +105,7 @@ public class AfficherEngagement extends Form {
             ServiceSponsors.getInstance().updateSponsor(sponsor);
 
             addGUIs();
-        });
+        });*/
        
  btnSupprimer.addActionListener(action -> {
 
@@ -113,7 +116,7 @@ public class AfficherEngagement extends Form {
             btnClose.addActionListener((ee) -> dlg.dispose());
             Button btnConfirm = new Button("Confirmer");
             btnConfirm.addActionListener(actionConf -> {
-                ServiceSponsors.getInstance().deleteSponsor(sponsor.getId());
+                ServiceEngagements.getInstance().deleteEngagement(eng.getId());
                 evenementActuelle = null;
                 dlg.dispose();
                 this.removeAll();
@@ -127,10 +130,10 @@ public class AfficherEngagement extends Form {
             //dlg.show(0, 0, Display.getInstance().getDisplayWidth() - (pre.getWidth() + pre.getWidth() / 6), 0);
             dlg.show(1000, 1000, 10, 10);
 
-        });*/
+        });
 
         btnsContainer.addAll(btnModifier,btnSupprimer);
-      evenementModel.addAll(spEvent, spSponsor,btnsContainer);     
+      evenementModel.addAll(spEvent,spSponsor,btnsContainer);     
         return evenementModel;
 
 
