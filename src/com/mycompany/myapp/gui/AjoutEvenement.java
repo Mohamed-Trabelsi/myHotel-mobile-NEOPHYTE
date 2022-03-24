@@ -17,7 +17,9 @@ import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.Command;
 import com.codename1.ui.Display;
 import com.codename1.ui.spinner.Picker;
-
+import com.twilio.Twilio;
+import com.twilio.rest.api.v2010.account.Message;
+import com.twilio.type.PhoneNumber;
 import com.mycompany.myapp.services.ServiceEvenements;
 import java.util.ArrayList;
 

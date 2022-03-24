@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.myapp.gui;
 
 import com.codename1.ui.Button;
@@ -56,7 +52,7 @@ public class AjoutEngagement extends Form{
         eventBox = new ComboBox();
        
         for (Evenements u : ServiceEvenements.getInstance().getAllEvenementssP()) {
-            eventBox.addItem(u.getLibelleE());   
+            eventBox.addItem(u.getId());   
         }
          SponsorLabel = new Label("sponsor");
         SponsorLabel.setUIID("defaultLabel");
@@ -64,7 +60,7 @@ public class AjoutEngagement extends Form{
         ArrayList<Sponsors> s = ServiceSponsors.getInstance().getAllSponsor();
         
         for (Sponsors t : s) {
-            sponsorBox.addItem(t.getNomS());
+            sponsorBox.addItem(t.getId());
         }
         
         btnAdd = new Button("Ajouter");

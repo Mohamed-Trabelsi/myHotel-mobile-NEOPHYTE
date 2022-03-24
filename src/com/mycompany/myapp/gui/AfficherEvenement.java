@@ -29,6 +29,7 @@ import java.util.ArrayList;
  */
 
     public class AfficherEvenement extends Form {
+        
                 public static Evenements evenementActuelle = null;
     public static Resources theme = UIManager.initFirstTheme("/theme");
 
@@ -41,11 +42,12 @@ import java.util.ArrayList;
 
     public AfficherEvenement(Form previous) {
         super("", new BoxLayout(BoxLayout.Y_AXIS));
+        
         addGUIs();
         addActions();
        // getToolbar().hideToolbar();
         getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, (evt) -> {
-            perevious.showBack();
+            //perevious.showBack();
         });
     }
 
