@@ -17,6 +17,8 @@ public class Pointage {
     private int duree;
     private int etatConge;
     private int id_user;
+    private String userNom;
+    private String userPrenom;
 
     public Pointage() {
     }
@@ -101,6 +103,33 @@ public class Pointage {
     public void setId_user(int id_user) {
         this.id_user = id_user;
     }
+
+    public Pointage(String dateDepart, String typePtg, int duree, int id_user, String userNom, String userPrenom) {
+        this.dateDepart = dateDepart;
+        this.typePtg = typePtg;
+        this.duree = duree;
+        this.id_user = id_user;
+        this.userNom = userNom;
+        this.userPrenom = userPrenom;
+    }
+
+    public String getUserNom() {
+        return userNom;
+    }
+
+    public void setUserNom(String userNom) {
+        this.userNom = userNom;
+    }
+
+    public String getUserPrenom() {
+        return userPrenom;
+    }
+
+    public void setUserPrenom(String userPrenom) {
+        this.userPrenom = userPrenom;
+    }
+    
+    
 
     @Override
     public String toString() {

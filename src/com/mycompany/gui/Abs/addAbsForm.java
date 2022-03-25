@@ -23,80 +23,98 @@ import com.mycompany.entities.User;
 import com.mycompany.services.ServicePointage;
 import com.mycompany.services.ServiceUser;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
  * @author dell
  */
 public class addAbsForm extends Form {
+
+    Object L;
+    Map<String, Object> userll = new HashMap<>();
+
+    private Map<String, Object> createListEntry(String name, int id) {
+        Map<String, Object> entry = new HashMap<>();
+        entry.put("Line1", name);
+        entry.put("Line2", id);
+        return entry;
+    }
+
     public addAbsForm(Form previous) {
 
         setTitle("Add a new Abs");
         setLayout(BoxLayout.y());
-        
-        Label CategorieLabel = new Label("Utilisateur");
-       ServiceUser serviceTask = new ServiceUser();
+
+        Label UserLabel = new Label("Utilisateur");
+        ServiceUser serviceTask = new ServiceUser();
         ArrayList<User> Users = serviceTask.getAllUsers();
         ComboBox userBox = new ComboBox();
-        userBox.addItem("f");
+
         for (User u : Users) {
-            
-            userBox.addItem(u.getId_user());
-            
-            
+            userll.put(u.getNom(), u.getId_user());
+            userBox.addItem(u.getNom());
         }
-        Container categorieContainer = new Container(new BoxLayout(BoxLayout.X_AXIS));
-        categorieContainer.add(CategorieLabel);
-        categorieContainer.add(userBox);
+        System.out.println("uuuuuuuu"+userll);
+        Label userEror = new Label("*");
+        userEror.getAllStyles().setFgColor(0xff0000);
+        userEror.setVisible(false);
+        Container userContainer = new Container(new BoxLayout(BoxLayout.X_AXIS));
+        userContainer.add(UserLabel);
+        userContainer.add(userBox);
+        userContainer.add(userEror);
 
         TextField tfDuree = new TextField("", "Duree");
-        ComboBox cbType = new ComboBox ();
-        cbType.addItem ("absence justifie");
-        cbType.addItem ("absence non justifie");
-        
-       
+        ComboBox cbType = new ComboBox();
+        cbType.addItem("absence justifie");
+        cbType.addItem("absence non justifie");
+
         Picker tfdateD = new Picker();
-        tfdateD .setType(Display.PICKER_TYPE_DATE);
-       tfdateD .setUIID("TextFieldBlack");
-        
-        
+        tfdateD.setType(Display.PICKER_TYPE_DATE);
+        tfdateD.setUIID("TextFieldBlack");
+
         Button btnAdd = new Button("Add");
         btnAdd.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
-                if ((tfDuree.getText().length() == 0)  ) {
+
+                if ((tfDuree.getText().length() == 0)) {
                     System.out.println("d");
-                    
-                  //Dialog.show("Alert", "Please fill all the fields", new Command("OK"));
-                  Dialog.show("Alert", "Please fill all the fields", "OK", "CANCEL");
-          
-                 
+
+                    //Dialog.show("Alert", "Please fill all the fields", new Command("OK"));
+                    Dialog.show("Alert", "Please fill all the fields", "OK", "CANCEL");
+
                 } else {
                     try {
-                         Pointage p = new Pointage(tfdateD.getText(), (String) cbType.getSelectedItem()
-                                 ,Integer.parseInt(tfDuree.getText())
-                                 , (int) userBox.getSelectedItem());
-                         System.out.println(p);
- 
+                       L = userll.get(userBox.getSelectedItem().toString());
+                        System.out.println(L);
+                       float duree = Float.parseFloat(L.toString());
+                       int idu = (int)duree;
+                        Pointage p = new Pointage(tfdateD.getText(), (String) cbType.getSelectedItem(),
+                                Integer.parseInt(tfDuree.getText()),
+                                idu);
+                        System.out.println(p);
+
                         if (ServicePointage.getInstance().addAbs(p)) {
-                                 //Dialog.show("Success", "Connection accepted", new Command("OK"));
-                                 Dialog.show("Success", "Ajouté avec succès", "OK", "CANCEL");
+                            //Dialog.show("Success", "Connection accepted", new Command("OK"));
+                            Dialog.show("Success", "Ajouté avec succès", "OK", "CANCEL");
                             previous.showBack();
                         } else {
                             //Dialog.show("ERROR", "Server error", new Command("OK"));
                             Dialog.show("Alerte", "Server error", "OK", "CANCEL");
                         }
                     } catch (NumberFormatException e) {
-                       // Dialog.show("ERROR", "Status must be a number", new Command("OK"));
+                        // Dialog.show("ERROR", "Status must be a number", new Command("OK"));
                     }
                 }
             }
         });
-        addAll(tfdateD, tfDuree,cbType, categorieContainer,btnAdd);
+        addAll(tfdateD, tfDuree, cbType, userContainer, btnAdd);
         getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, (evt) -> {
             previous.showBack();
         });
 
     }
-    
+
 }

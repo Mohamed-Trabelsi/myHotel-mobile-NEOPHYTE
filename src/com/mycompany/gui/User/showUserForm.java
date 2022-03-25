@@ -33,13 +33,14 @@ public class showUserForm extends Form {
     Button btnAjouter;
 
     public showUserForm(Form perevious) {
-         super("", new BoxLayout(BoxLayout.Y_AXIS));
+         super("Liste Des Utilisateurs", new BoxLayout(BoxLayout.Y_AXIS));
         addGUIs();
         addActions();
        // getToolbar().hideToolbar();
         getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, (evt) -> {
             perevious.showBack();
         });
+        
         
        
     }
@@ -56,6 +57,9 @@ public class showUserForm extends Form {
         btnAjouter.setUIID("newButton");
         getToolbar().addMaterialCommandToRightBar(" ",FontImage.MATERIAL_ADD_CIRCLE,(evt1)-> {
             new addUserForm(this).show();
+        });
+         getToolbar().addMaterialCommandToRightBar(" ",FontImage.MATERIAL_ACCOUNT_BOX,(evt1)-> {
+            new showNUser(this).show();
         });
         
       
@@ -120,6 +124,8 @@ public class showUserForm extends Form {
         updateUser.tfCinU.setText(String.valueOf(user.getCin()));
         updateUser.tfTelUserU.setText(String.valueOf(user.getTel_user()));
         updateUser.tfEmailUserU.setText(String.valueOf(user.getEmail_user()));
+        
+        refresh();
         
         new updateUser(this).show();
         });

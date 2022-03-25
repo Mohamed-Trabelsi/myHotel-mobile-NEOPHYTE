@@ -67,67 +67,46 @@ public class ServicePointage {
         return resultOK;
     }
 
-    public ArrayList<Pointage> parseCategs(String jsonText) {
+   public ArrayList<Pointage> ParseAbs(String jsonText){
         try {
-            Abs = new ArrayList<>();
-            JSONParser j = new JSONParser();
-            Map<String, Object> AbsListJson = j.parseJSON(new CharArrayReader(jsonText.toCharArray()));
-            List<Map<String, Object>> list = (List<Map<String, Object>>) AbsListJson.get("root");
-
+            Abs=new ArrayList<>();
+            JSONParser j = new JSONParser();// Instanciation d'un objet JSONParser permettant le parsing du résultat json
+            Map<String,Object> categListJson = j.parseJSON(new CharArrayReader(jsonText.toCharArray()));
+            List<Map<String,Object>> list = (List<Map<String,Object>>)categListJson.get("root");
+            
             //Parcourir la liste des tâches Json
-            for (Map<String, Object> obj : list) {
+            for(Map<String,Object> obj : list){
                 //Création des tâches et récupération de leurs données
-                Pointage p = new Pointage();
-
-               Map<String, Object> usere = (Map<String, Object>) obj.get("user");
+               Pointage p = new Pointage();
+             
+                float duree = Float.parseFloat(obj.get("duree").toString());
+                p.setUserNom((String) obj.get("userNom"));
+                p.setUserPrenom((String) obj.get("userPrenom"));
+                
+                    p.setTypePtg(obj.get("typePtg").toString());
+                   
+                p.setDuree((int)duree);
                
-                float iduser = Float.parseFloat(usere.get("idUser").toString());
-               
-                User m = new ServiceUser().getUserParId((int)iduser);
-                
-               int id = m.getId_user();
-              
-                p.setId_user(id);
-                
-                
-
-               // float id = Float.parseFloat(usere.get("idUser").toString());
-               // p.setId_user((int) id);
-
-                //System.out.println(obj.get("user")); 
-           
-                float idPtg = Float.parseFloat(obj.get("idPtg").toString());
-                //p.setId_user((String) obj.get("user"));
-                
-            p.setDateDepart((String) obj.get("dateDepart"));
-            p.setTypePtg((String) obj.get("typePtg"));
-
-            float duree = Float.parseFloat(obj.get("duree").toString());
-            p.setDuree((int) duree);
-
-            p.setIdPtg((int) idPtg);
-
-            Abs.add(p);
+              Abs.add(p);
+            }
+            
+            
+        } catch (IOException ex) {
+            
         }
-
+          return Abs;
     }
-    catch (IOException ex) {
-    }
-
-     
-    return Abs ;
-}
 
 public ArrayList<Pointage> getAllAbs() {
 
-        String url = Statics.BASE_URL+"/AbsMobileShow";
+        String url = Statics.BASE_URL+"/displayAbs";
 
         req.setUrl(url);
         req.setPost(false);
         req.addResponseListener(new ActionListener<NetworkEvent>() {
             @Override
         public void actionPerformed(NetworkEvent evt) {
-                Abs = parseCategs(new String(req.getResponseData()));
+                Abs = ParseAbs(new String(req.getResponseData()));
                 req.removeResponseListener(this);
             }
         });

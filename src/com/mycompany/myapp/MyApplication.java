@@ -74,10 +74,10 @@ public class MyApplication {
             @Override
             public void actionPerformed(ActionEvent evt) {
                 User u = new ServiceUser().login(tfEmail.getText(), tfPassword.getText());
-                System.out.println("vbvvvvvvvvvvvv " + u);
-                if (u == null) {
+                
+                if (u == null ) {
                     Dialog.show("Alerte", "username et/ou mot de passe incorrect ! ", "ok", null);
-                } else if (u != null) {
+                } else if (u != null ) {
                     u.setPassword(tfPassword.getText());
                     tfEmail.setText("");
                     tfPassword.setText("");

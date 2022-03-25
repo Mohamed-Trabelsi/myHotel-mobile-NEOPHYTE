@@ -5,17 +5,22 @@
  */
 package com.mycompany.gui;
 
+import com.codename1.components.ImageViewer;
 import static com.codename1.push.PushContent.setTitle;
 import com.codename1.ui.Button;
 import com.codename1.ui.Dialog;
+import com.codename1.ui.EncodedImage;
 import com.codename1.ui.Form;
+import com.codename1.ui.Image;
 import com.codename1.ui.Toolbar;
+import com.codename1.ui.URLImage;
 import com.codename1.ui.events.ActionEvent;
 import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.layouts.BoxLayout;
 import com.mycompany.entities.User;
 import com.mycompany.gui.Abs.showAbsForm;
 import com.mycompany.gui.User.showUserForm;
+import java.io.IOException;
 
 /**
  *
@@ -27,6 +32,7 @@ public class HomeUserForm extends Form{
  
         setTitle("Bonjour :" + u.getPrenom()+" "+ u.getNom());
         setLayout(BoxLayout.y());
+        
          Toolbar tb = this.getToolbar();
          tb.addCommandToOverflowMenu("Déconnecter", null,new ActionListener(){
             @Override

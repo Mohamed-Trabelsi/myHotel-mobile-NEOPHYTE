@@ -155,6 +155,7 @@ public class ServiceUser {
                 String d = new String(req.getResponseData());
                 System.out.println("data"+d);
                 gUser = ser.parseUserJson(new String(req.getResponseData()));
+                System.out.println("vbvvvvvvvvvvvv " + gUser);
                 req.removeResponseListener(this);
             }
         });
@@ -195,6 +196,35 @@ public class ServiceUser {
         NetworkManager.getInstance().addToQueueAndWait(req);
         return users;
     }
+    public ArrayList<User> getNUsers() {
+        String url = Statics.BASE_URL + "/userNMobileShow";
+        req.setUrl(url);
+
+        req.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                users = parseUsers(new String(req.getResponseData()));
+                req.removeResponseListener(this);
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(req);
+        return users;
+    }
+    public void Confirmer (int id) {
+        
+        String url = Statics.BASE_URL+"/userMobileConfirmer?idUser=" + id;
+         req.setUrl(url);
+        req.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+            req.removeResponseCodeListener(this);
+           
+            }
+        });
+         NetworkManager.getInstance().addToQueueAndWait(req);
+        
+    }
+
 
     public boolean deleteUser(int idUser) {
         String url = Statics.BASE_URL + "/userMobileDelete?idUser=" + idUser;

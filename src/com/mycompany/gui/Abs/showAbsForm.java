@@ -77,13 +77,13 @@ public class showAbsForm extends Form {
         Container evenementModel = new Container(new BoxLayout(BoxLayout.Y_AXIS));
         evenementModel.setUIID("evenementContainer");
 
-        Label labelDateDepart = new Label("Date Depart : " + abs.getDateDepart());
+        //Label labelDateDepart = new Label("Date Depart : " + abs.getDateDepart());
 
         Label labelTypePtg = new Label("Type d'absence : " + abs.getTypePtg());
 
         Label labelDuree = new Label("Duree : " + abs.getDuree());
    
-        Label labelUtilisateur = new Label("utilisateur : " + abs.getId_user());
+        Label labelUtilisateur = new Label("utilisateur : " + abs.getUserPrenom()+" "+ abs.getUserNom());
 
         Container btnsContainer = new Container(new BoxLayout(BoxLayout.X_AXIS));
         btnsContainer.setUIID("buttonsContainer");
@@ -140,7 +140,7 @@ public class showAbsForm extends Form {
         });
         
          btnsContainer.addAll( btnSupprimer,btnModifier);
-        evenementModel.addAll(labelDateDepart, labelTypePtg,labelDuree,labelUtilisateur, btnsContainer);
+        evenementModel.addAll(labelTypePtg,labelDuree,labelUtilisateur, btnsContainer);
         return evenementModel;
     }
 }
