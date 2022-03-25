@@ -21,8 +21,24 @@ public class User {
     private String role;
     private int etat;
     private String genre;
+    private String image;
     
     public User() {
+    }
+
+    public User(int idUser, String nom, String prenom, int age, int cin, int tel_user, String email_user, String password, String role, int etat, String genre, String image) {
+        this.idUser = idUser;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.age = age;
+        this.cin = cin;
+        this.tel_user = tel_user;
+        this.email_user = email_user;
+        this.password = password;
+        this.role = role;
+        this.etat = etat;
+        this.genre = genre;
+        this.image = image;
     }
 
     public User(String nom, String prenom, int age, int cin, int tel_user, String email_user, String password, String role, String genre) {

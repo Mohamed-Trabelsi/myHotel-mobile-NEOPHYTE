@@ -23,13 +23,14 @@ import java.util.Map;
  * @author dell
  */
 public class ServiceUser {
+    User gUser = new User();
 
     public ArrayList<User> users;
     public static ServiceUser instance = null;
     public boolean resultOK = true;
     private ConnectionRequest req;
 
-    private ServiceUser() {
+    public ServiceUser() {
         req = new ConnectionRequest();
     }
 
@@ -70,6 +71,40 @@ public class ServiceUser {
         NetworkManager.getInstance().addToQueueAndWait(req);
         return resultOK;
     }
+ public User parseUserJson(String json) {
+        User u = null;
+        try {
+            JSONParser j = new JSONParser();
+            Map<String, Object> user = j.parseJSON(new CharArrayReader(json.toCharArray()));
+            if (!user.isEmpty()) {
+                u = new User();
+                float id = Float.parseFloat(user.get("idUser").toString());
+                u.setId_user((int) id);
+                
+                float age = Float.parseFloat(user.get("age").toString());
+                u.setAge((int) age);
+                
+                 float tel = Float.parseFloat(user.get("telUser").toString());
+                    u.setTel_user((int) tel);
+                    
+                     float cin = Float.parseFloat(user.get("cin").toString());
+                    u.setCin((int) cin);
+               
+               
+                u.setNom(user.get("nom").toString());
+                u.setPrenom(user.get("prenom").toString());
+                u.setEmail_user(user.get("emailUser").toString());
+                u.setRole(user.get("role").toString());
+                u.setPassword(user.get("password").toString());
+                u.setGenre(user.get("Genre").toString());
+                   
+                
+                
+            }
+        } catch (IOException ex) {
+        }
+        return u;
+    }
 
     public ArrayList<User> parseUsers(String jsonText) {
         try {
@@ -106,6 +141,45 @@ public class ServiceUser {
         }
         return users;
     }
+   
+    
+    
+     public User login(String emailUser, String password) {
+        
+        String url = Statics.BASE_URL+"/userMobileLogin?emailUser="+emailUser+"&password="+password;
+        req.setUrl(url);
+        req.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                ServiceUser ser = new ServiceUser();
+                String d = new String(req.getResponseData());
+                System.out.println("data"+d);
+                gUser = ser.parseUserJson(new String(req.getResponseData()));
+                req.removeResponseListener(this);
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(req);
+        return gUser;
+    }
+     
+
+
+    public User getUserParId(int id) {
+     
+        String url = Statics.BASE_URL+"/userMobilegetByID/"+id;
+         req.setUrl(url);
+        req.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                ServiceUser ser = new ServiceUser();
+                gUser = ser.parseUserJson(new String(req.getResponseData()));
+                req.removeResponseListener(this);
+            }
+        });
+         NetworkManager.getInstance().addToQueueAndWait(req);
+        return gUser;
+    }
+
 
     public ArrayList<User> getAllUsers() {
         String url = Statics.BASE_URL + "/userMobileShow";
@@ -141,7 +215,7 @@ public class ServiceUser {
        String url = Statics.BASE_URL + "/userMobileUpdate/"+id+ "?nom=" + u.getNom()+ "&prenom=" + u.getPrenom()
                 + "&age=" + u.getAge() + "&cin=" + u.getCin() + "&telUser=" + u.getTel_user()
                 + "&emailUser=" + u.getEmail_user() + "&role=" + u.getRole()
-                + "&Genre=" + u.getGenre() + "&password=" + u.getPassword();
+                + "&Genre=" + u.getGenre();
         req.setUrl(url);
         req.addResponseListener(new ActionListener<NetworkEvent>(){
             @Override
