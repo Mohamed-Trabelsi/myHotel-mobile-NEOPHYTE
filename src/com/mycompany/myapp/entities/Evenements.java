@@ -10,7 +10,7 @@ package com.mycompany.myapp.entities;
  * @author trabelssi
  */
 public class Evenements {
-    private int id;
+    private int id,etatEv;
     private String libelleE,dateDE,dateFE,descriptionE,espaceE;
     private int capaciteE;
 
@@ -24,6 +24,19 @@ public class Evenements {
         this.capaciteE = capaciteE;
     }
 
+    public Evenements(int id, int etatEv, String libelleE, String dateDE, String dateFE, String descriptionE, String espaceE, int capaciteE) {
+        this.id = id;
+        this.etatEv = etatEv;
+        this.libelleE = libelleE;
+        this.dateDE = dateDE;
+        this.dateFE = dateFE;
+        this.descriptionE = descriptionE;
+        this.espaceE = espaceE;
+        this.capaciteE = capaciteE;
+    }
+
+    
+  
     public Evenements() {
     }
 
@@ -36,6 +49,8 @@ public class Evenements {
         this.capaciteE = capaciteE;
     }
 
+    
+    
     public int getId() {
         return id;
     }
@@ -64,6 +79,12 @@ public class Evenements {
         return capaciteE;
     }
 
+    public int getEtatEv() {
+        return etatEv;
+    }
+
+    
+    
     public void setId(int id) {
         this.id = id;
     }
@@ -91,6 +112,12 @@ public class Evenements {
     public void setCapaciteE(int capaciteE) {
         this.capaciteE = capaciteE;
     }
+
+    public void setEtatEv(int etatEv) {
+        this.etatEv = etatEv;
+    }
+    
+    
 
     @Override
     public String toString() {

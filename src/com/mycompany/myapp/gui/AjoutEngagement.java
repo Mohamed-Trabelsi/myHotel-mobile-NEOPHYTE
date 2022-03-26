@@ -18,17 +18,31 @@ import com.mycompany.myapp.services.ServiceEngagements;
 import com.mycompany.myapp.services.ServiceEvenements;
 import com.mycompany.myapp.services.ServiceSponsors;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
  * @author trabelssi
  */
 public class AjoutEngagement extends Form{
+    
     Label CategorieLabel,eventLabel,SponsorLabel;
     Button btnAdd;
     ComboBox eventBox,sponsorBox;
-        Form previous;
+    Form previous;
 
+    Object E;
+    Object S;
+    Map<String, Object> userll = new HashMap<>();
+
+    private Map<String, Object> createListEntry(String name, int id) {
+        Map<String, Object> entry = new HashMap<>();
+        entry.put("Line1", name);
+        entry.put("Line2", id);
+        return entry;
+    }
+    
     public AjoutEngagement(Form previous) {
 
       
@@ -50,18 +64,27 @@ public class AjoutEngagement extends Form{
        eventLabel = new Label("Event");
         eventLabel.setUIID("defaultLabel");
         eventBox = new ComboBox();
-       
-        for (Evenements u : ServiceEvenements.getInstance().getAllEvenementssP()) {
+        ArrayList<Evenements> e = ServiceEvenements.getInstance().getAllEvenementssP();
+        /*for (Evenements u : ServiceEvenements.getInstance().getAllEvenementssP()) {
             eventBox.addItem(u.getId());   
+        }*/
+        for (Evenements u : e) {
+            userll.put(u.getLibelleE(), u.getId());
+            eventBox.addItem(u.getLibelleE());
         }
          SponsorLabel = new Label("sponsor");
         SponsorLabel.setUIID("defaultLabel");
          sponsorBox = new ComboBox();
         ArrayList<Sponsors> s = ServiceSponsors.getInstance().getAllSponsor();
         
-        for (Sponsors t : s) {
-            sponsorBox.addItem(t.getId());
+        for (Sponsors i : s) {
+            userll.put(i.getNomS(), i.getId());
+            sponsorBox.addItem(i.getNomS());
         }
+        
+        /*for (Sponsors t : s) {
+            sponsorBox.addItem(t.getId());
+        }*/
         
         btnAdd = new Button("Ajouter");
         btnAdd.setUIID("actionButton");
@@ -84,7 +107,13 @@ this.addAll( EventContainer);
                  
                 } else {*/
                     try {
-                         Engagements e = new Engagements((int)eventBox.getSelectedItem(),(int)sponsorBox.getSelectedItem());
+                         E = userll.get(eventBox.getSelectedItem().toString());
+                         S = userll.get(sponsorBox.getSelectedItem().toString());
+                         float nomE = Float.parseFloat(E.toString());
+                         int ide = (int)nomE;
+                         float nomS = Float.parseFloat(S.toString());
+                         int ids = (int)nomS;
+                         Engagements e = new Engagements(ide,ids);
                          System.out.println(e);
  
                         if (ServiceEngagements.getInstance().AddEngagements(e)) {

@@ -4,6 +4,7 @@
  */
 package com.mycompany.myapp.gui;
 
+import com.codename1.components.ToastBar;
 import com.codename1.ui.Button;
 import com.codename1.ui.Command;
 import com.codename1.ui.Dialog;
@@ -15,6 +16,14 @@ import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.layouts.BoxLayout;
 import com.mycompany.myapp.entities.Sponsors;
 import com.mycompany.myapp.services.ServiceSponsors;
+import com.sendgrid.Content;
+import com.sendgrid.Email;
+import com.sendgrid.Mail;
+import com.sendgrid.Method;
+import com.sendgrid.Request;
+import com.sendgrid.Response;
+import com.sendgrid.SendGrid;
+import java.io.IOException;
 
 /**
  *
@@ -51,6 +60,15 @@ btnAdd.addActionListener(new ActionListener() {
                 }               
             }  
         });
+ToastBar.getInstance().setPosition(BOTTOM);
+                ToastBar.Status status = ToastBar.getInstance().createStatus();
+                status.setShowProgressIndicator(true);
+                //status.setIcon(res.getImage("done.png").scaledSmallerRatio(Display.getInstance().getDisplayWidth()/10, Display.getInstance().getDisplayWidth()/15));
+                status.setMessage("Sponsor ajouté avec succès");
+                status.setExpires(10000);
+                status.show();
+
+                refreshTheme();
 addAll(tfNom,tfAdresse,tfTel,btnAdd);
 getToolbar().addMaterialCommandToLeftBar("",FontImage.MATERIAL_ARROW_BACK, (evt) -> {
 previous.showBack();

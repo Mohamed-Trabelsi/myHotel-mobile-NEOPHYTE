@@ -82,7 +82,10 @@ import java.util.ArrayList;
     Component creerEvenement(Evenements event) {
         Container evenementModel = new Container(new BoxLayout(BoxLayout.Y_AXIS));
         evenementModel.setUIID("evenementContainer");
+Button btnlib = new Button((String) event.getLibelleE());
+btnlib.addActionListener(action -> {
 
+        });
         Label labelLibelle = new Label((String) event.getLibelleE());
         labelLibelle.setUIID("Libelle");
         
@@ -98,9 +101,20 @@ import java.util.ArrayList;
         Label labelEspace = new Label(event.getEspaceE());
         labelEspace.setUIID("Espace");
         
-       
-       SpanLabel sp = new SpanLabel();
+       Label sp = new Label();
        sp.setText("Capacite : " + event.getCapaciteE());
+       
+       Label spetat = new Label();
+       
+       if(event.getEtatEv()==0)
+       {  
+       spetat.setText("Non validé");
+       }
+       else
+       {
+        spetat.setText("Validé");
+       }
+           
        
 
         Container btnsContainer = new Container(new BoxLayout(BoxLayout.X_AXIS));
@@ -111,8 +125,14 @@ import java.util.ArrayList;
         btnModifier.setUIID("actionButton");
               Button btnSupprimer = new Button();
               btnSupprimer.setUIID("actionButton");
+            
+              Button btnValider = new Button();
+              btnValider.setUIID("actionButton");
+              FontImage.setMaterialIcon(btnValider, FontImage.MATERIAL_CHECK_CIRCLE);
+              
                 FontImage.setMaterialIcon(btnSupprimer, FontImage.MATERIAL_DELETE);
                 FontImage.setMaterialIcon(btnModifier, FontImage.MATERIAL_UPDATE);
+                
        
         btnModifier.addActionListener(action -> {
  evenementActuelle = event;
@@ -145,9 +165,17 @@ import java.util.ArrayList;
             dlg.show(1000, 1000, 10, 10);
 
         });
+ btnValider.addActionListener(action -> {
+      ServiceEvenements.getInstance().validerEvent(event.getId());
+evenementActuelle = event;
+this.removeAll();
+ addGUIs();
+            this.refreshTheme();
+        });
+ 
 
-        btnsContainer.addAll(btnModifier,btnSupprimer);
-      evenementModel.addAll(labelLibelle, labelDateD,labelDateF, spanLabelDescription,labelEspace,sp, btnsContainer);     
+      btnsContainer.addAll(btnModifier,btnSupprimer,btnValider);
+      evenementModel.addAll(btnlib,labelLibelle, labelDateD,labelDateF, spanLabelDescription,labelEspace,sp,spetat, btnsContainer);     
         return evenementModel;
 
 
