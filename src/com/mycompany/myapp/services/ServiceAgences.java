@@ -125,8 +125,7 @@ String url = Statics.BASE_URL +"/dis";
         return resultOK;
     }
     
-    
-    
+
     
     public boolean updateAgence (Agences t, int id)
    {

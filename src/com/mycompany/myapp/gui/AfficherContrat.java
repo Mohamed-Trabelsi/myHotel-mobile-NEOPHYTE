@@ -19,7 +19,10 @@ import com.codename1.ui.plaf.UIManager;
 import com.codename1.ui.util.Resources;
 import com.mycompany.entities.Contrats;
 import com.mycompany.myapp.services.ServiceContrats;
+import java.io.IOException;
 import java.util.ArrayList;
+
+
 /**
  *
  * @author asus
@@ -99,7 +102,12 @@ public class AfficherContrat extends Form{
             btnClose.addActionListener((ee) -> dlg.dispose());
             Button btnConfirm = new Button("Confirmer");
             btnConfirm.addActionListener(actionConf -> {
-                ServiceContrats.getInstance().validercontrat(event.getId());
+                try {
+                    ServiceContrats.getInstance().validercontrat(event.getId());
+                } catch (IOException ex) {
+                   
+                }
+                
                 evenementActuelle = null;
                 dlg.dispose();
                 this.removeAll();

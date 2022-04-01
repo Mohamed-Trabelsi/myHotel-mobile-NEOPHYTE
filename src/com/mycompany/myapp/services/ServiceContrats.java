@@ -5,19 +5,33 @@
  */
 package com.mycompany.myapp.services;
 
+import com.codename1.components.ToastBar;
+import static com.codename1.contacts.ContactsManager.refresh;
 import com.codename1.io.CharArrayReader;
 import com.codename1.io.ConnectionRequest;
 import com.codename1.io.JSONParser;
 import com.codename1.io.NetworkEvent;
 import com.codename1.io.NetworkManager;
-import com.codename1.ui.Button;
+
 import java.util.List;
 import com.codename1.ui.events.ActionListener;
 import com.mycompany.entities.Contrats;
 import com.mycompany.myapp.utils.Statics;
 import java.io.IOException;
 import java.util.ArrayList;
+
+import com.sun.mail.smtp.SMTPTransport;
+
+import java.util.Date;
 import java.util.Map;
+import java.util.Properties;
+import javax.mail.Message;
+import javax.mail.Session;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+
+
+
 /**
  *
  * @author asus
@@ -28,7 +42,7 @@ public class ServiceContrats {
     public boolean resultOK=true;
     private ConnectionRequest req;
 
-    private ServiceContrats() {
+    public ServiceContrats() {
          req = new ConnectionRequest();
     }
 
@@ -124,7 +138,7 @@ String url = Statics.BASE_URL +"/disp";
         NetworkManager.getInstance().addToQueueAndWait(req);
         return resultOK;
     }
-     public boolean validercontrat (int id)
+     public boolean validercontrat (int id) throws IOException
    {
        
         String url = Statics.BASE_URL +"/validercc?id="+id;
@@ -138,6 +152,70 @@ String url = Statics.BASE_URL +"/disp";
             }    
         });
         NetworkManager.getInstance().addToQueueAndWait(req);
+       sendMail();
         return resultOK;
    }
+     /* public void sendMail() throws IOException 
+     {
+     
+                
+
+                Email from = new Email("myhotel70@gmail.com");
+                String subject = "Compte Banni";
+                Email to = new Email("myhotel70@gmail.com");
+                Content content = new Content("text/plain", "l'etat du contrat est modifie"
+                        + "Veuillez verifier dans la base de donnée." + "Cordialement,");
+                Mail mail = new Mail(from, subject, to, content);
+
+                SendGrid sg = new SendGrid("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");
+                Request request = new Request();
+                request.setMethod(Method.POST);
+                request.setEndpoint("mail/send");
+                request.setBody(mail.build());
+                Response response = sg.api(request);
+                System.out.println(response.getStatusCode());
+                System.out.println(response.getBody());
+                System.out.println(response.getHeaders());
+                refresh();
+     
+     
+     }*/
+   public void sendMail() {
+          String email;
+        email = "myhotel.contact@gmail.com";
+        try {
+            
+            Properties props = new Properties();
+                props.put("mail.transport.protocol", "smtp"); //SMTP protocol
+		props.put("mail.smtps.host", "smtp.gmail.com"); //SMTP Host
+		props.put("mail.smtps.auth", "true"); //enable authentication
+             
+            Session session = Session.getInstance(props,null); // aleh 9rahach 5ater mazlna masabinach javax.mail .jar
+            
+            
+            MimeMessage msg = new MimeMessage(session);
+            
+            msg.setFrom(new InternetAddress("Reintialisation mot de passe <monEmail@domaine.com>"));
+            msg.setRecipients(Message.RecipientType.TO, email);
+            msg.setSubject("Application nom  : Confirmation du ");
+            msg.setSentDate(new Date(System.currentTimeMillis()));
+            
+           
+           String txt = "l'etat de votre contrat a changé";
+           
+           
+           msg.setText(txt);
+           
+          SMTPTransport  st = (SMTPTransport)session.getTransport("smtps") ;
+            
+          st.connect("smtp.gmail.com",465,"myhotel.contact@gmail.com","myhotel@pidev");
+           
+          st.sendMessage(msg, msg.getAllRecipients());
+            
+          System.out.println("server response : "+st.getLastServerResponse());
+          
+        }catch(Exception e ) {
+            e.printStackTrace();
+        }
+    } 
 }
