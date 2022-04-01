@@ -60,7 +60,7 @@ btnAdd.addActionListener(new ActionListener() {
                 }               
             }  
         });
-ToastBar.getInstance().setPosition(BOTTOM);
+/*ToastBar.getInstance().setPosition(BOTTOM);
                 ToastBar.Status status = ToastBar.getInstance().createStatus();
                 status.setShowProgressIndicator(true);
                 //status.setIcon(res.getImage("done.png").scaledSmallerRatio(Display.getInstance().getDisplayWidth()/10, Display.getInstance().getDisplayWidth()/15));
@@ -68,7 +68,7 @@ ToastBar.getInstance().setPosition(BOTTOM);
                 status.setExpires(10000);
                 status.show();
 
-                refreshTheme();
+                refreshTheme();*/
 addAll(tfNom,tfAdresse,tfTel,btnAdd);
 getToolbar().addMaterialCommandToLeftBar("",FontImage.MATERIAL_ARROW_BACK, (evt) -> {
 previous.showBack();

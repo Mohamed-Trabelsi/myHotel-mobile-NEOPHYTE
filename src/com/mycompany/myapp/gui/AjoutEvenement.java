@@ -87,7 +87,8 @@ btnAdd.addActionListener(new ActionListener() {
                         if( ServiceEvenements.getInstance().AddEvenements(t))
                         {
                            Dialog.show("Success","Connection accepted",new Command("OK"));
-                           //previous.showBack();
+                           previous.showBack();
+                           
                         }else
                             Dialog.show("ERROR", "Server error", new Command("OK"));
                     } catch (NumberFormatException e) {

@@ -47,7 +47,7 @@ import java.util.ArrayList;
         addActions();
        // getToolbar().hideToolbar();
         getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, (evt) -> {
-            //perevious.showBack();
+          previous.showBack(); 
         });
     }
 
