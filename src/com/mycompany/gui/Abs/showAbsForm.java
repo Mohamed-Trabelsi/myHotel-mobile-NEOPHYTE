@@ -19,11 +19,14 @@ import com.codename1.ui.util.Resources;
 import com.mycompany.entities.Pointage;
 import com.mycompany.entities.User;
 import com.mycompany.gui.Abs.addAbsForm;
+import static com.mycompany.gui.Abs.updateAbs.tfId;
 import static com.mycompany.gui.User.showUserForm.evenementActuelle;
 import com.mycompany.gui.User.updateUser;
 import com.mycompany.services.ServicePointage;
 import com.mycompany.services.ServiceUser;
+
 import java.util.ArrayList;
+
 
 /**
  *
@@ -78,12 +81,11 @@ public class showAbsForm extends Form {
         evenementModel.setUIID("evenementContainer");
 
         //Label labelDateDepart = new Label("Date Depart : " + abs.getDateDepart());
-
         Label labelTypePtg = new Label("Type d'absence : " + abs.getTypePtg());
 
         Label labelDuree = new Label("Duree : " + abs.getDuree());
-   
-        Label labelUtilisateur = new Label("utilisateur : " + abs.getUserPrenom()+" "+ abs.getUserNom());
+
+        Label labelUtilisateur = new Label("utilisateur : " + abs.getUserPrenom() + " " + abs.getUserNom());
 
         Container btnsContainer = new Container(new BoxLayout(BoxLayout.X_AXIS));
         btnsContainer.setUIID("buttonsContainer");
@@ -103,15 +105,15 @@ public class showAbsForm extends Form {
             ServiceUser.getInstance().updateUser(user);
 
             addGUIs();*/
-            /*updateUser.tfId.setText(String.valueOf(user.getId_user()));
-            updateUser.tfnomU.setText(String.valueOf(user.getNom()));
-            updateUser.tfPrenomU.setText(String.valueOf(user.getPrenom()));
-            updateUser.tfAgeU.setText(String.valueOf(user.getAge()));
-            updateUser.tfCinU.setText(String.valueOf(user.getCin()));
-            updateUser.tfTelUserU.setText(String.valueOf(user.getTel_user()));
-            updateUser.tfEmailUserU.setText(String.valueOf(user.getEmail_user()));*/
+           
+            updateAbs.tfDureeAbs.setText(String.valueOf(abs.getDuree()));
+            System.out.println("duree : "+abs.getDuree());
+            updateAbs.tfId.setText(String.valueOf(abs.getIdPtg()));
+            System.out.println("iddddd : "+abs.getIdPtg());
 
-            new updateUser(this).show();
+        
+
+            new updateAbs(this).show();
         });
         btnSupprimer.addActionListener(action -> {
 
@@ -129,7 +131,7 @@ public class showAbsForm extends Form {
                 addGUIs();
                 this.refreshTheme();
             });
-            
+
             Container btnContainer = new Container(new BoxLayout(BoxLayout.X_AXIS));
             btnContainer.addAll(btnClose, btnConfirm);
             dlg.addComponent(BorderLayout.SOUTH, btnContainer);
@@ -138,9 +140,9 @@ public class showAbsForm extends Form {
             dlg.show(1000, 1000, 10, 10);
 
         });
-        
-         btnsContainer.addAll( btnSupprimer,btnModifier);
-        evenementModel.addAll(labelTypePtg,labelDuree,labelUtilisateur, btnsContainer);
+
+        btnsContainer.addAll(btnSupprimer, btnModifier);
+        evenementModel.addAll(labelTypePtg, labelDuree, labelUtilisateur, btnsContainer);
         return evenementModel;
     }
 }

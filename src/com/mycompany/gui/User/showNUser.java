@@ -90,12 +90,9 @@ public class showNUser extends Form{
                 status.setMessage("User Confirmé");
                 status.show();
 
-                
                 ServiceUser su = new ServiceUser();
                 su.getInstance().Confirmer(user.getId_user());
                 refresh();
-          
-                
 
             }
         });

@@ -89,6 +89,9 @@ public class ServiceUser {
                     
                      float cin = Float.parseFloat(user.get("cin").toString());
                     u.setCin((int) cin);
+                    
+                     float etat = Float.parseFloat(user.get("etat").toString());
+                    u.setEtat((int) etat);
                
                
                 u.setNom(user.get("nom").toString());
@@ -213,6 +216,21 @@ public class ServiceUser {
     public void Confirmer (int id) {
         
         String url = Statics.BASE_URL+"/userMobileConfirmer?idUser=" + id;
+         req.setUrl(url);
+        req.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+            req.removeResponseCodeListener(this);
+           
+            }
+        });
+         NetworkManager.getInstance().addToQueueAndWait(req);
+        
+    }
+    
+    public void Ban (int id) {
+        
+        String url = Statics.BASE_URL+"/userMobileBan?idUser=" + id;
          req.setUrl(url);
         req.addResponseListener(new ActionListener<NetworkEvent>() {
             @Override

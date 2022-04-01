@@ -73,6 +73,7 @@ public class updateUser extends Form {
                         System.out.println(u);
 
                         if (ServiceUser.getInstance().updateUser(u,Integer.parseInt(tfId.getText()))) {
+                          
                            // Dialog.show("Success", "Connection accepted", new Command("OK"));
                            Dialog.show("Success", "Modifié avec succès", "OK", "CANCEL");
                             previous.showBack();

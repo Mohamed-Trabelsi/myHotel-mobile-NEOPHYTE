@@ -78,6 +78,9 @@ public class ServicePointage {
             for(Map<String,Object> obj : list){
                 //Création des tâches et récupération de leurs données
                Pointage p = new Pointage();
+               
+                float idPtg = Float.parseFloat(obj.get("idPtg").toString());
+                p.setIdPtg((int) idPtg);
              
                 float duree = Float.parseFloat(obj.get("duree").toString());
                 p.setUserNom((String) obj.get("userNom"));
@@ -129,9 +132,10 @@ public ArrayList<Pointage> getAllAbs() {
     }
 
     public boolean updateAbs(Pointage p, int id) {
-        String url = Statics.BASE_URL + "/userMobileUpdate/" + id + "?dateDepart=" + p.getDateDepart()
-                + "&typePtg=" + p.getTypePtg()
+        String url = Statics.BASE_URL + "/AbsMobileUpdate/" + id + "?dateDepart=" + p.getDateDepart()
+                + "&typePtg=" + p.getTypePtg()+"&user_id=" + p.getId_user()
                 + "&duree=" + p.getDuree();
+                 
         req.setUrl(url);
         req.addResponseListener(new ActionListener<NetworkEvent>() {
             @Override

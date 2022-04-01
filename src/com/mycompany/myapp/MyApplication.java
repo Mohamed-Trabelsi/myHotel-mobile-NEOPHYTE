@@ -77,7 +77,7 @@ public class MyApplication {
                 
                 if (u == null ) {
                     Dialog.show("Alerte", "username et/ou mot de passe incorrect ! ", "ok", null);
-                } else if (u != null ) {
+                } else if (u != null && u.getEtat() == 1 ) {
                     u.setPassword(tfPassword.getText());
                     tfEmail.setText("");
                     tfPassword.setText("");
