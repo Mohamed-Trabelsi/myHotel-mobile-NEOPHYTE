@@ -28,7 +28,7 @@ import java.util.ArrayList;
  * @author trabelssi
  */
 
-    public class AfficherEvenement extends Form {
+    public class AfficherEvenementFront extends Form {
         
                 public static Evenements evenementActuelle = null;
     public static Resources theme = UIManager.initFirstTheme("/theme");
@@ -40,7 +40,7 @@ import java.util.ArrayList;
    
     Button btnAjouter;
 
-    public AfficherEvenement(Form previous) {
+    public AfficherEvenementFront(Form previous) {
         super("", new BoxLayout(BoxLayout.Y_AXIS));
         
         addGUIs();

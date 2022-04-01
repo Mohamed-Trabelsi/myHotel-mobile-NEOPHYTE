@@ -6,6 +6,8 @@
         <group>
             <file>file:/C:/Users/trabelssi/Desktop/CodenameOne/src/com/mycompany/myapp/utils/Statics.java</file>
             <file>file:/C:/Users/trabelssi/Desktop/CodenameOne/src/com/mycompany/myapp/gui/AjoutSponsor.java</file>
+            <file>file:/C:/Users/trabelssi/Desktop/CodenameOne/src/com/mycompany/myapp/MyApplication.java</file>
+            <file>file:/C:/Users/trabelssi/Desktop/CodenameOne/src/com/mycompany/myapp/gui/AfficherEvenementFront.java</file>
             <file>file:/C:/Users/trabelssi/Desktop/CodenameOne/src/com/mycompany/myapp/gui/AfficherEngagement.java</file>
             <file>file:/C:/Users/trabelssi/Desktop/CodenameOne/src/com/mycompany/myapp/gui/AjoutEngagement.java</file>
             <file>file:/C:/Users/trabelssi/Desktop/CodenameOne/src/com/mycompany/myapp/gui/DetailEvent.java</file>
@@ -17,6 +19,7 @@
             <file>file:/C:/Users/trabelssi/Desktop/CodenameOne/src/com/mycompany/myapp/services/ServiceEngagements.java</file>
             <file>file:/C:/Users/trabelssi/Desktop/CodenameOne/src/com/mycompany/myapp/gui/obj.java</file>
             <file>file:/C:/Users/trabelssi/Desktop/CodenameOne/src/com/mycompany/myapp/services/ServiceEvenements.java</file>
+            <file>file:/C:/Users/trabelssi/Desktop/CodenameOne/src/com/mycompany/myapp/gui/HomeEventFront.java</file>
             <file>file:/C:/Users/trabelssi/Desktop/CodenameOne/src/com/mycompany/myapp/gui/perevious.java</file>
             <file>file:/C:/Users/trabelssi/Desktop/CodenameOne/src/com/mycompany/myapp/gui/ModifierEvenement.java</file>
             <file>file:/C:/Users/trabelssi/Desktop/CodenameOne/src/com/mycompany/myapp/gui/AfficherEvenement.java</file>
