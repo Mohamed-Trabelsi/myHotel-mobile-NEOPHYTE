@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<resource majorVersion="1" minorVersion="11" useXmlUI="false">
+    <legacyFont name="Handlee-Regular.ttf" />
+    <image name="iconH.png"  />
+    <theme name="Theme">
+        <val key="@includeNativeBool" value="true" />
+        <font key="font" type="system" face="0" style="2" size="0" />
+    </theme>
+</resource>
