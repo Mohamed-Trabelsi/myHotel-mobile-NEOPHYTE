@@ -58,7 +58,7 @@ public class homeagence extends Form{
         
            imagea.addActionListener(e-> new imagea());
           mapAgence.addActionListener(e-> new MapAgence()); 
-        statAgence.addActionListener(e-> new StatAgence(theme).show()); 
+        statAgence.addActionListener(e-> new StatAgence()); 
        btnListSponsors.addActionListener(e-> new AfficherAgence(a).show());
         btnListEvenements.addActionListener(e-> new AfficherContrat(a).show());
         
@@ -77,6 +77,7 @@ public class homeagence extends Form{
          f.getToolbar().addMaterialCommandToLeftSideMenu("Gestion des produits", " ".charAt(0),e -> new homeAhmed().show());
         f.getToolbar().addMaterialCommandToLeftSideMenu("Gestion des services", " ".charAt(0),e -> new HomeServBack() .show());
       f.getToolbar().addMaterialCommandToLeftSideMenu("Statistique catégorie", " ".charAt(0),e -> new statistique().getF().show());
+                  f.getToolbar().addMaterialCommandToLeftSideMenu("Gestion des réservations", " ".charAt(0),e -> new HomeResBack() .show());
           // f.getToolbar().addMaterialCommandToLeftSideMenu("Gestion des produits", " ".charAt(0),e -> new listCategForm(f,res) .show());
   // f.getToolbar().addMaterialCommandToLeftSideMenu("Gestion des agences", " ".charAt(0),e -> new listCategForm(f,res) .show());
    // f.getToolbar().addMaterialCommandToLeftSideMenu("Gestion des réservation", " ".charAt(0),e -> new listCategForm(f,res) .show());

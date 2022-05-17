@@ -97,6 +97,7 @@ public class ServiceContrats {
                 t.setId((int)id);
                 float prix= Float.parseFloat(obj.get("prix").toString());
                 t.setPrix((int)prix);
+                  t.setAgence(obj.get("agence").toString());
                    t.setTitre(obj.get("titre").toString());
                 t.setDated(obj.get("dated").toString());
                 t.setDatef(obj.get("datef").toString());

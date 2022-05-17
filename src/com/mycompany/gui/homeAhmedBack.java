@@ -66,7 +66,7 @@ public class homeAhmedBack extends Form{
        btnListSponsors.addActionListener(e-> new AfficherProduit(current).show());
        btnListEvenements.addActionListener(e-> new AfficherFournisseur(current).show());
        btnMap.addActionListener(e->new MapAgence());
-       statProduit.addActionListener(e-> new StatistiquePieForm(theme).show()); 
+       statProduit.addActionListener(e-> new StatistiquePieForm()); 
        
        //btnAdd.addActionListener(e-> new AjoutProduit(current).show());
         addAll(btnListSponsors,btnMap,statProduit,btnListEvenements);
@@ -84,6 +84,8 @@ public class homeAhmedBack extends Form{
          f.getToolbar().addMaterialCommandToLeftSideMenu("Gestion des produits", " ".charAt(0),e -> new homeAhmed().show());
         f.getToolbar().addMaterialCommandToLeftSideMenu("Gestion des services", " ".charAt(0),e -> new HomeServBack() .show());
       f.getToolbar().addMaterialCommandToLeftSideMenu("Statistique catégorie", " ".charAt(0),e -> new statistique().getF().show());
+                  f.getToolbar().addMaterialCommandToLeftSideMenu("Gestion des réservations", " ".charAt(0),e -> new HomeResForm() .show());
+                              f.getToolbar().addMaterialCommandToLeftSideMenu("Gestion des réservations", " ".charAt(0),e -> new HomeResBack() .show());
           // f.getToolbar().addMaterialCommandToLeftSideMenu("Gestion des produits", " ".charAt(0),e -> new listCategForm(f,res) .show());
   // f.getToolbar().addMaterialCommandToLeftSideMenu("Gestion des agences", " ".charAt(0),e -> new listCategForm(f,res) .show());
    // f.getToolbar().addMaterialCommandToLeftSideMenu("Gestion des réservation", " ".charAt(0),e -> new listCategForm(f,res) .show());

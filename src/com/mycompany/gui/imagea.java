@@ -27,6 +27,7 @@ public class imagea {
     Label lbltImage = new Label ();
     f.add(btCapture);
     f.add(lbltImage);
+    
     btCapture.addActionListener( e->{
    String path= Capture.capturePhoto(Display.getInstance().getDisplayWidth(),-1);
     if (path!=null)
@@ -44,5 +45,13 @@ public class imagea {
 }
     );
     f.show();
-            }}
+            }
+
+
+
+
+
+
+
+}
            

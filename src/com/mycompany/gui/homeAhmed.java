@@ -66,7 +66,7 @@ public class homeAhmed extends Form{
        btnListSponsors.addActionListener(e-> new AfficherProduit(current).show());
        btnListEvenements.addActionListener(e-> new AfficherFournisseur(current).show());
        btnMap.addActionListener(e->new MapAgence());
-       statProduit.addActionListener(e-> new StatistiquePieForm(theme).show()); 
+       statProduit.addActionListener(e-> new StatistiquePieForm()); 
        
        //btnAdd.addActionListener(e-> new AjoutProduit(current).show());
         addAll(btnListSponsors,btnMap,statProduit,btnListEvenements);

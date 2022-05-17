@@ -61,7 +61,7 @@ public class homeagencefront extends Form{
         
            imagea.addActionListener(e-> new imagea());
           mapAgence.addActionListener(e-> new MapAgence()); 
-        statAgence.addActionListener(e-> new StatAgence(theme).show()); 
+        statAgence.addActionListener(e-> new StatAgence()); 
        btnListSponsors.addActionListener(e-> new AfficherAgencefront(a).show());
         btnListEvenements.addActionListener(e-> new AfficherContratfront(a).show());
         

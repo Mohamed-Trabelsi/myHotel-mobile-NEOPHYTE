@@ -69,7 +69,7 @@ public class addCategForm extends Form {
                         if( ServiceCateg.getInstance().addCateg(t))
                         { 
                            
-                           Dialog.show("Success","Connection accepted",new Command("OK"));
+                           Dialog.show("Success","ajout effectué",new Command("OK"));
                             ToastBar.showMessage("catégorie ajoutée avec succés", FontImage.MATERIAL_INFO);
                            LocalNotification ln = new LocalNotification();
                         ln.setId("LnMessage");

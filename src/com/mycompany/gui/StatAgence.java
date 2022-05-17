@@ -71,246 +71,47 @@ import java.util.Iterator;
  * @author Chédy
  */
 
-public class StatAgence extends Form {
+public class StatAgence  {
   
-        
-    private boolean drawOnMutableImage;
-   
-    
-    private double nbr_feedback = 2;
-    private double nbr_reclamation =5;
-   
-    Form current;
-Form form;
-Form a;
-
-        public StatAgence(Resources res)  {
-        
-            current= this;
-
-        Toolbar tb = new Toolbar(true);
-        setToolbar(tb);
-        getTitleArea().setUIID("Container");
-        setTitle("");
-        getContentPane().setScrollVisible(false);
-        
-        
-        tb.addSearchCommand(e -> {});
-        
-        Tabs swipe = new Tabs();
-
-        Label spacer1 = new Label();
-        Label spacer2 = new Label();
-        
-                
-        swipe.setUIID("Container");
-        swipe.getContentPane().setUIID("Container");
-        swipe.hideTabs();
-        
-        ButtonGroup bg = new ButtonGroup();
-        int size = Display.getInstance().convertToPixels(1);
-        Image unselectedWalkthru = Image.createImage(size, size, 0);
-        Graphics g = unselectedWalkthru.getGraphics();
-        g.setColor(0xffffff);
-        g.setAlpha(100);
-        g.setAntiAliased(true);
-        g.fillArc(0, 0, size, size, 0, 360);
-        Image selectedWalkthru = Image.createImage(size, size, 0);
-        g = selectedWalkthru.getGraphics();
-        g.setColor(0xffffff);
-        g.setAntiAliased(true);
-        g.fillArc(0, 0, size, size, 0, 360);
-        RadioButton[] rbs = new RadioButton[swipe.getTabCount()];
-        FlowLayout flow = new FlowLayout(CENTER);
-        flow.setValign(BOTTOM);
-        Container radioContainer = new Container(flow);
-        for(int iter = 0 ; iter < rbs.length ; iter++) {
-            rbs[iter] = RadioButton.createToggle(unselectedWalkthru, bg);
-            rbs[iter].setPressedIcon(selectedWalkthru);
-            rbs[iter].setUIID("Label");
-            radioContainer.add(rbs[iter]);
-        }
-                
-       
-        swipe.addSelectionListener((i, ii) -> {
-            if(!rbs[ii].isSelected()) {
-                rbs[ii].setSelected(true);
-            }
-        });
-        refreshTheme();
-        Component.setSameSize(radioContainer, spacer1, spacer2);
-        add(LayeredLayout.encloseIn(swipe, radioContainer));
-        a =this;
-        Button btnListEvenements = new Button("Liste des contrats");
-        Button btnListSponsors = new Button("Liste des Agences");
-        
-        
-      
-       btnListSponsors.addActionListener(e-> new AfficherAgence(a).show());
-        btnListEvenements.addActionListener(e-> new AfficherContrat(a).show());
-        
-        addAll(btnListEvenements,btnListSponsors);
-       
-       
-    
-        
-        //app 
-        createPieChartForm();
-        
-        
-        }
-
-    
-    
-    
-    
-    
-    
-     private void updateArrowPosition(Button b, Label arrow) {
-        arrow.getUnselectedStyle().setMargin(LEFT, b.getX() + b.getWidth() / 2 - arrow.getWidth() / 2);
-        arrow.getParent().repaint();
-        
-        
-    }
-    
-    private void addTab(Tabs swipe, Image img, Label spacer, String text) {
-        int size = Math.min(Display.getInstance().getDisplayWidth(), Display.getInstance().getDisplayHeight());
-        if(img.getHeight() < size) {
-            img = img.scaledHeight(size);
-        }
-
-        if(img.getHeight() > Display.getInstance().getDisplayHeight() / 2) {
-            img = img.scaledHeight(Display.getInstance().getDisplayHeight() / 2);
-        }
-        ScaleImageLabel image = new ScaleImageLabel(img);
-        image.setUIID("Container");
-        image.setBackgroundType(Style.BACKGROUND_IMAGE_SCALED_FILL);
-        Label overlay = new Label(" ", "ImageOverlay");
-        
-        Container page1 = 
-            LayeredLayout.encloseIn(
-                image,
-                overlay,
-                BorderLayout.south(
-                    BoxLayout.encloseY(
-                            new SpanLabel(text, "LargeWhiteText"),
-                            spacer
-                        )
-                )
-            );
-
-        swipe.addTab("", page1);
-    }
-    
-   private void addButton(Image img,String title) {
-          int height = Display.getInstance().convertToPixels(11.5f);
-        int width = Display.getInstance().convertToPixels(14f);
-        Button image = new Button(img.fill(width, height));
-        image.setUIID("Label");
-        Container cnt = BorderLayout.west(image);
-        cnt.setLeadComponent(image);
-        TextArea ta = new TextArea(title);
-        ta.setUIID("NewsTopLine");
-        ta.setEditable(false);
-
-         
-      
-       cnt.add(BorderLayout.CENTER, 
-               BoxLayout.encloseY(
-                       ta
-               ));
-       
-       image.addActionListener(e -> {
-           try{
-           new AjoutAgence(this).show();
-           }catch(Exception exx) {
-               
-           }
-               });
-        add(cnt);
-        image.addActionListener(e -> ToastBar.showMessage(title, FontImage.MATERIAL_INFO));
-   }
-    private void bindButtonSelection(Button b, Label arrow) {
-        b.addActionListener(e -> {
-            if(b.isSelected()) {
-                updateArrowPosition(b, arrow);
-            }
-        });
-    }
-    
-
-    //Statistique :
-    //fontion : bch n7adhro size ta3 labels ta3 stat w margin w colors ba3d chn3aytoulha methode hethi.
-    public DefaultRenderer buildCatRendrer(int []colors) {
-        
+   Form Stat;
+    private Resources theme;
+ 
+    private DefaultRenderer buildCategoryRenderer(int[] colors) {
         DefaultRenderer renderer = new DefaultRenderer();
-        renderer.setLabelsTextSize(15);
-        renderer.setLegendTextSize(15);
-        renderer.setMargins(new int[] {20, 30, 15, 0});
-        
-        for(int color : colors) {
-            SimpleSeriesRenderer simpleSeriesRenderer = new SimpleSeriesRenderer();
-            
-            simpleSeriesRenderer.setColor(color);
-            renderer.addSeriesRenderer(simpleSeriesRenderer);
+        renderer.setLabelsTextSize(50);
+        renderer.setLabelsColor(0x000000);
+        renderer.setLegendTextSize(50);
+        renderer.setMargins(new int[]{20, 30, 15, 0});
+        for (int color : colors) {
+            SimpleSeriesRenderer r = new SimpleSeriesRenderer();
+            r.setColor(color);
+            renderer.addSeriesRenderer(r);
         }
-        return renderer;
-     }  
-    
-    
-    public void createPieChartForm() {
-        
-        //chna3ml stat feedback par rapport l reclamation 
-        double total = nbr_feedback + nbr_reclamation;
-        
-        //values
-        double prcntFeed = (nbr_feedback *100)/total;
-        
-        double prcntRec = (nbr_reclamation * 100)/total;
-        
-        //colors set:
-        int[]colors = new int[]{0xf4b342, 0x52b29a};
-        
-        DefaultRenderer renderer = buildCatRendrer(colors);
-        renderer.setLabelsColor(0x000000); // black color for labels.
-        
-        renderer.setZoomButtonsVisible(true);//zoom
-        renderer.setLabelsTextSize(40);
+        renderer.setZoomButtonsVisible(true);
         renderer.setZoomEnabled(true);
         renderer.setChartTitleTextSize(20);
         renderer.setDisplayValues(true);
         renderer.setShowLabels(true);
-        SimpleSeriesRenderer r = renderer.getSeriesRendererAt(0);
-        r.setHighlighted(true);
-        
-        //CREATe the chart ...
-        PieChart chart = new PieChart(buildDataset("title",Math.round(prcntFeed),Math.round(prcntRec)), renderer);
-        
-        // n7oto chart fi component
-        ChartComponent c  = new ChartComponent(chart);
-        
-        String []messages = {
-            "Statistique contrat"
-        };
-        
-        SpanLabel message = new SpanLabel(messages[0], "WelcomeMessage");
-        
-        Container cnt = BorderLayout.center(message);
-        cnt.setUIID("Container");
-        add(cnt);
-        add(c);
-                
-                
+        return renderer;
     }
 
-    private CategorySeries buildDataset(String title, double prcntFeed, double prcntRec) {
-        
-    
+    /**
+     * Builds a category series using the provided values.
+     *
+     * @param titles the series titles
+     * @param values the values
+     * @return the category series
+     */
+        protected CategorySeries buildCategoryDataset(String title, double[] values) {
                 CategorySeries series = new CategorySeries(title);
-      
-           
-              try{
-      ServiceContrats eventService=new ServiceContrats();
+        ServiceContrats ss = new ServiceContrats();
+        int k = 0;
+             // ServiceServ eventService = new ServiceServ();
+        // ArrayList<service> listEvent = eventService.getAllCategs();
+       // Iterator<service> it = listEvent.iterator();
+          ArrayList<Contrats> lescategories = ss.getAllEvenementssP();
+              try{  
+      ServiceContrats eventService=new ServiceContrats();       
         ArrayList<Contrats> listcateg = eventService.getAllEvenementssP();
  
 Iterator<Contrats> it = listcateg.iterator();
@@ -319,27 +120,118 @@ while (it.hasNext()) {
  long nb =0;
   String nba =null;
     System.out.println(j.getId()+" id");
-        for( Contrats ee : listcateg)
-        {
-        String n = ee.getTitre();
-        if(n.equals(j.getTitre()))
+        for(Contrats ee : listcateg)
+        {        
+        String n = ee.getAgence();
+        if(n.equals(j.getAgence()))
             nba=n;
-
-
+        
+             
         }
-
+        
           nb++; 
-           series.add(nba,nb);
+           series.add(nba,nb);  
 }
       }
       catch(Exception i)
       {
+          i.printStackTrace();
       }
         return series;
  
-
-      }
+    /*  int nb = 1;
+          String nba =null;
+          while (it.hasNext()) {
+        for (categ temp : lescategories) {
+              
+            service ens = it.next();
+            if (temp.getName().equals(ens.getId_categ())) {
+                nb++;
+                System.out.println("nb:" +nb);
+    nba=ens.getId_categ();
+            }
+           
+        }  } 
+         */
         
+        //  series.add(nba,nb); 
+     //return series;
+       
+      }
+     /*   for (double value : values) {
+            series.add("service " + ++k, value);
+        }
+ return series;
+        return series;*/
+    
+    
+
+    public Form createPieChartForm() {
+        // Generate the values
+        double[] values = new double[]{14, 10, 4, 1, 12};
+
+        // Set up the renderer
+        int[] colors = new int[]{ColorUtil.BLUE, ColorUtil.GREEN, ColorUtil.YELLOW, ColorUtil.CYAN, ColorUtil.MAGENTA ,ColorUtil.GRAY,ColorUtil.LTGRAY,ColorUtil.rgb(200, 10, 30),ColorUtil.rgb(100,250, 130)};
+        DefaultRenderer renderer = buildCategoryRenderer(colors);
+
+        SimpleSeriesRenderer r = renderer.getSeriesRendererAt(0);
+        r.setGradientEnabled(true);
+        r.setGradientStart(0, ColorUtil.BLUE);
+        r.setGradientStop(0, ColorUtil.GREEN);
+        r.setGradientStop(0, ColorUtil.YELLOW);
+        r.setGradientStop(0, ColorUtil.CYAN);
+        r.setGradientStop(0, ColorUtil.MAGENTA);
+  r.setGradientStart(0, ColorUtil.BLACK);
+        r.setGradientStop(0, ColorUtil.GRAY);
+        r.setGradientStop(0, ColorUtil.LTGRAY);
+             r.setGradientStop(0, ColorUtil.rgb(200, 10, 30));
+                    r.setGradientStop(0, ColorUtil.rgb(100,250, 130));
+          
+r.setDisplayBoundingPoints(true);
+                    
+
+        // Create the chart ... pass the values and renderer to the chart object.
+        PieChart chart = new PieChart(buildCategoryDataset("service", values), renderer);
+
+        // Wrap the chart in a Component so we can add it to a form
+        ChartComponent c = new ChartComponent(chart);
+
+        // Create a form and show it.
+        Stat = new Form("Statistique", new BorderLayout());
+       
+        Stat.getToolbar().addCommandToLeftBar("back", null, (ev) -> {
+            homeAhmedBack h;
+            h = new homeAhmedBack();
+            h.show();
+        });
+        //Stat.getStyle().setBgColor(0x50d3ed);
+
+        Stat.add(BorderLayout.CENTER, c);
+
+
+        return Stat;
+
+    }
+
+    public void StatistiqueTest() {
+
+        Stat = createPieChartForm();
+    
+        Stat.show();
+
+    }
+
+    public Form getF() {
+        return Stat;
+    }
+
+    public void setF(Form f) {
+        this.Stat = f;
+    }
+
+    public StatAgence() {
+        StatistiqueTest();
+    }
         
         
         

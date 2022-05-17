@@ -82,7 +82,7 @@ public class addServForm extends Form{
                        service t = new service(tfdb.getText(),tfdf.getText(),categorieBox.getSelectedItem().toString());
                      if( ServiceServ.getInstance().addCateg(t))
                         {
-                           Dialog.show("Success","Connection accepted",new Command("OK"));
+                           Dialog.show("Success","ajout effectué",new Command("OK"));
                }else
                             Dialog.show("ERROR", "Server error", new Command("OK"));
                     } catch (NumberFormatException e) {

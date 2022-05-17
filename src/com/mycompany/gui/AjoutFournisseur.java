@@ -21,7 +21,7 @@ import com.mycompany.services.ServiceFournisseurs;
  */
 public class AjoutFournisseur extends Form{
     public AjoutFournisseur(Form previous) {
-        setTitle("Ajouter un Produit ");
+        setTitle("Ajouter un fournisseur ");
         setLayout(BoxLayout.y());
             
 TextField tfLibelle = new TextField("","nom");
